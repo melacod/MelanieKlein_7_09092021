@@ -1,0 +1,35 @@
+{
+  "name": "lespetitsplats",
+  "version": "1.0.0",
+  "description": "Projet 7 OpenClassrooms - Les petits plats",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --style expanded --watch ./sass/main.scss:./public/css/style.css",
+    "compress": "sass --style compressed --no-source-map ./sass/main.scss:./public/css/style.css",
+    "prefix": "postcss ./public/css/style.css --use autoprefixer --replace",
+    "lint": "eslint ./public/js/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melacod/MelanieKlein_7_09092021.git"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "sass",
+    "js"
+  ],
+  "author": "Mélanie Klein",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/melacod/MelanieKlein_7_09092021/issues"
+  },
+  "homepage": "https://github.com/melacod/MelanieKlein_7_09092021#readme",
+  "browserslist": "last 4 versions",
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.1"
+  }
+}
