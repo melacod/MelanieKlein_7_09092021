@@ -1,4 +1,4 @@
-import { Ingredient } from "./ingredient";
+import { Ingredient } from "./ingredient.js";
 
 export { Recipe };
 
@@ -12,6 +12,11 @@ class Recipe {
         this.servings = servings;
         this.ingredients = [];
 
+        for (let ingredient of ingredients) {
+            let ingredientObj = new Ingredient (ingredient);
+            this.ingredients.push(ingredientObj);
+        }
+        
         this.time = time;
         this.description = description;
         this.appliance = appliance;
