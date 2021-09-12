@@ -11113,9 +11113,38 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.logo {
+  height: 100px;
+}
+
 .navbar {
   width: 1240px;
   height: 69px;
+}
+
+.filter--selection {
+  min-width: 300px;
+  max-width: 700px;
+}
+.filter--items {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  overflow: auto;
+  max-height: 400px;
+}
+.filter--item {
+  width: 30%;
+  padding: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.filter--item:hover {
+  color: black;
+  background-color: lightgray;
+}
+.filter--input::placeholder {
+  color: white;
 }
 
 /*# sourceMappingURL=style.css.map */
