@@ -1,0 +1,29 @@
+<div class="col">
+
+    <div id="{name}" class="filter--container">
+
+        <button class="btn btn-primary p-3 filter--button">
+            {name} <i class="bi bi-caret-down-fill"></i>
+        </button>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="filter--selection">
+
+            <div class="input-group">
+                <input type="text" class="form-control bg-primary text-white p-3 filter--input"
+                    placeholder="Rechercher un ingrédient" aria-label="Rechercher un ingrédient"
+                    aria-describedby="ingredients-icon" />
+                <span id="ingredients--icon" class="input-group-text filter--icon bg-primary text-white">
+                    <i class="bi bi-caret-up-fill "></i>
+                </span>
+            </div>
+
+            <ul class="input-group-text filter--items bg-primary text-white">
+                {htmlOptions}
+            </ul>
+        </div>
+
+    </div>
+    
+</div>

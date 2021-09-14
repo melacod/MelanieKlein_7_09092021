@@ -1,16 +1,30 @@
 import { Data } from "./modules/data.js";
 import { Factory } from "./modules/factory.js";
+import { Filter } from "./modules/filter.js";
+import { Template } from "./modules/template.js";
+
+// dom elements
+const genFilters = document.querySelector('#gen-filters');
 
 // created recipes
 let recipes = [] ;
 
-Data.loadJsonData().then( (jsonData) => {
+Template.loadTemplates().then( () => {
+    Data.loadJsonData().then( (jsonData) => {
 
-    recipes = Factory.createRecipes(jsonData.recipes);
+        recipes = Factory.createRecipes(jsonData.recipes);
+    
+        displayFilters();
 
-    console.log(recipes);
+        console.log(recipes);
+    });
 });
 
+function displayFilters () {
+    let appliances = getAppliances();
+    let filterAppliances = new Filter("Appareils", appliances);
+    genFilters.insertAdjacentHTML('beforeend', filterAppliances.displayFilter());
+}
 
 // compute appliance 
 function getAppliances () {

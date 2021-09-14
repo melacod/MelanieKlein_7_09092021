@@ -1,263 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Les petits plats" />
 
-    <title>Les petits plats</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Les petits plats" />
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-      crossorigin="anonymous"
-    />
+  <title>Les petits plats</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-    />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
 
-    <link href="./public/css/style.css" rel="stylesheet" />
-  </head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 
-  <body>
-    <div class="container">
-      <div class="row">&nbsp;</div>
-      <div class="row">
-        <div class="col d-flex justify-content-center">
-          <a href="index.html" aria-label="Accueil">
-            <img
-              class="logo"
-              alt="Logo les petits plats"
-              src="./public/media/lespetitsplatsLogo.png"
-            />
-          </a>
-        </div>
+  <link href="./public/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div class="col d-flex justify-content-center">
+        <a href="index.html" aria-label="Accueil">
+          <img class="logo" alt="Logo les petits plats" src="./public/media/lespetitsplatsLogo.png" />
+        </a>
       </div>
-      <div class="row">&nbsp;</div>
     </div>
+    <div class="row">&nbsp;</div>
 
-    <main class="container">
-
-      <!-- Main search -->
-      <form>
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control bg-light p-3"
-            placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
-            aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette"
-            aria-describedby="main-icon"
-          />
-          <span id="search-icon" class="input-group-text">
-            <i class="bi bi-search"></i>
-          </span>
-        </div>
-      </form>
-
-      <div class="row">&nbsp;</div>
-
-      <!-- Selected filter tags -->
-      <div class="row">
-        <div class="col">
-          <button type="button" class="btn btn-primary">
-            Coco <i class="bi bi-x-circle ms-1"></i>
-          </button>
-        </div>
+    <!-- Main search -->
+    <form>
+      <div class="input-group">
+        <input type="text" class="form-control bg-light p-3"
+          placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
+          aria-label="Rechercher un ingrédient, appareil, ustensiles ou une recette" aria-describedby="main-icon" />
+        <span id="search-icon" class="input-group-text">
+          <i class="bi bi-search"></i>
+        </span>
       </div>
+    </form>
 
-      <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
 
-      <!-- Tag selection -->
-      <div class="row">
-        <div class="col">
+  </div>
 
-          <div id="ingredients" class="filter--container">
-            
-            <button class="btn btn-primary p-3 filter--button">
-              Ingrédients <i class="bi bi-caret-down-fill"></i>
-            </button>
+  <!-- Selected filter tags -->
 
-            <div class="row">&nbsp;</div>
+  <div class="container">
 
-            <div class="filter--selection">
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control bg-primary text-white p-3 filter--input"
-                  placeholder="Rechercher un ingrédient"
-                  aria-label="Rechercher un ingrédient"
-                  aria-describedby="ingredients-icon"
-                />
-                <span id="ingredients--icon" class="input-group-text filter--icon bg-primary text-white">
-                  <i class="bi bi-caret-up-fill "></i>
-                </span>
-              </div>
+    <div id="gen-filters" class="row">
+    </div>
+    
+  </div>
 
-              <ul class="input-group-text filter--items bg-primary text-white">
-                <li class="filter--item">Lait de coco</li>
-                <li class="filter--item">Jus de citron</li>
-                <li class="filter--item">Crème de coco</li>
-                <li class="filter--item">Glaçons</li>
-                <li class="filter--item">Thon Rouge (ou blanc)</li>
-                <li class="filter--item">Concombre</li>
-                <li class="filter--item">Tomate</li>
-                <li class="filter--item">Carotte</li>
-                <li class="filter--item">Citron Vert</li>
-                <li class="filter--item">Lait de Coco</li>
-                <li class="filter--item">Poulet</li>
-                <li class="filter--item">Coulis de tomate</li>
-                <li class="filter--item">Oignon</li>
-                <li class="filter--item">Poivron rouge</li>
-                <li class="filter--item">Huile d'olive</li>
-                <li class="filter--item">Riz blanc</li>
-                <li class="filter--item">Thon en miettes</li>
-                <li class="filter--item">Oeuf dur</li>
-                <li class="filter--item">Maïs</li>
-                <li class="filter--item">Vinaigrette</li>
-                <li class="filter--item">Pâte feuilletée</li>
-                <li class="filter--item">Crème fraiche</li>
-                <li class="filter--item">Gruyère râpé</li>
-                <li class="filter--item">Moutarde de Dijon</li>
-                <li class="filter--item">Pâte brisée</li>
-                <li class="filter--item">Pomme</li>
-                <li class="filter--item">Oeuf</li>
-                <li class="filter--item">Sucre en Poudre</li>
-                <li class="filter--item">Sucre vanillé</li>
-                <li class="filter--item">Pâte sablée</li>
-                <li class="filter--item">Chocolat au lait</li>
-                <li class="filter--item">Crème liquide</li>
-                <li class="filter--item">Beurre</li>
-                <li class="filter--item">Fraise</li>
-                <li class="filter--item">Noix</li>
-                <li class="filter--item">Chocolat noir</li>
-                <li class="filter--item">Farine</li>
-                <li class="filter--item">Olives</li>
-                <li class="filter--item">Fromage de chèvre</li>
-                <li class="filter--item">Vinaigre Balsamic</li>
-                <li class="filter--item">Basilic</li>
-                <li class="filter--item">Roblochon</li>
-                <li class="filter--item">Pommes de terre</li>
-                <li class="filter--item">Jambon fumé</li>
-                <li class="filter--item">Vin blanc sec</li>
-                <li class="filter--item">Tomates cerises</li>
-                <li class="filter--item">Mozzarella</li>
-                <li class="filter--item">Jambon de parme</li>
-                <li class="filter--item">Pommes</li>
-                <li class="filter--item">Salade Verte</li>
-                <li class="filter--item">Rhubarbe</li>
-                <li class="filter--item">Eau</li>
-                <li class="filter--item">Mâche</li>
-                <li class="filter--item">Échalote</li>
-                <li class="filter--item">Vinaigre de cidre</li>
-                <li class="filter--item">Huile d'olive</li>
-                <li class="filter--item">Saucisse bretonne ou de toulouse</li>
-                <li class="filter--item">Farine de blé noir</li>
-                <li class="filter--item">Fromage à raclette</li>
-                <li class="filter--item">Farine</li>
-                <li class="filter--item">Lait</li>
-                <li class="filter--item">Beurre salé</li>
-                <li class="filter--item">Banane</li>
-                <li class="filter--item">Pennes</li>
-                <li class="filter--item">Huile d'olives</li>
-                <li class="filter--item">Pastèque</li>
-                <li class="filter--item">Menthe</li>
-                <li class="filter--item">Ananas</li>
-                <li class="filter--item">Glace à la vanille</li>
-                <li class="filter--item">Kiwi</li>
-                <li class="filter--item">Citron</li>
-                <li class="filter--item">Sucre glace</li>
-                <li class="filter--item">Tagliatelles</li>
-                <li class="filter--item">Lardons</li>
-                <li class="filter--item">Parmesan</li>
-                <li class="filter--item">Spaghettis</li>
-                <li class="filter--item">Viande hachée 1% de matière grasse</li>
-                <li class="filter--item">Vin rouge</li>
-                <li class="filter--item">Crème Fraiche</li>
-                <li class="filter--item">Sucre</li>
-                <li class="filter--item">Crème Fraîche</li>
-                <li class="filter--item">Macaronis</li>
-                <li class="filter--item">Mayonnaise</li>
-                <li class="filter--item">Chocolat noir en pepites</li>
-                <li class="filter--item">Huile d'olives</li>
-                <li class="filter--item">Ail</li>
-                <li class="filter--item">Oseille</li>
-                <li class="filter--item">Crème fraîche</li>
-                <li class="filter--item">Vermicelles</li>
-                <li class="filter--item">Poireau</li>
-                <li class="filter--item">Crême fraîche</li>
-                <li class="filter--item">Pois chiches</li>
-                <li class="filter--item">Paprika</li>
-                <li class="filter--item">Pois Cassé</li>
-                <li class="filter--item">Haricots verts</li>
-                <li class="filter--item">Petits poids</li>
-                <li class="filter--item">Pain de mie</li>
-                <li class="filter--item">Blanc de dinde</li>
-                <li class="filter--item">Emmental</li>
-                <li class="filter--item">Gruyère</li>
-                <li class="filter--item">Noix de muscade</li>
-                <li class="filter--item">Saumon Fumé</li>
-                <li class="filter--item">Feuilles de laitue</li>
-                <li class="filter--item">Fromage blanc</li>
-                <li class="filter--item">Patate douce</li>
-                <li class="filter--item">Orange</li>
-                <li class="filter--item">Cumin</li>
-                <li class="filter--item">Courgette</li>
-                <li class="filter--item">Lasagnes</li>
-                <li class="filter--item">Maïzena</li>
-                <li class="filter--item">Viande hachée</li>
-                <li class="filter--item">Coulis de tomates</li>
-                <li class="filter--item">Pain</li>
-                <li class="filter--item">Sucre roux</li>
-                <li class="filter--item">Sucre en poudre</li>
-                <li class="filter--item">Bicarbonate</li>
-                <li class="filter--item">Chocolat</li>
-                <li class="filter--item">Poires au jus</li>
-                <li class="filter--item">Boudoirs</li>
-                <li class="filter--item">Beurre fondu</li>
-                <li class="filter--item">Pruneaux</li>
-                <li class="filter--item">Mascarpone</li>
-                <li class="filter--item">Pâte à pizza</li>
-                <li class="filter--item">Tomates pelées</li>
-                <li class="filter--item">Champignons de paris</li>
-                <li class="filter--item">Bananes</li>
-                <li class="filter--item">Kiwis</li>
-                <li class="filter--item">Mangue</li>
-                <li class="filter--item">Miel</li>
-                <li class="filter--item">Poudre d'amendes</li>
-              </ul>
-            </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
 
-          </div>
-        </div>
+  <script src="./public/js/index.js" type="module"></script>
+</body>
 
-        <div class="col">
-
-          <button class="btn btn-success p-3 filter--button">
-            Appareil <i class="bi bi-caret-down-fill"></i>
-          </button>
-
-        </div>
-
-        <div class="col">
-
-          <button class="btn btn-danger p-3 filter--button">
-            Ustensiles <i class="bi bi-caret-down-fill"></i>
-          </button>
-
-        </div>
-
-      </div>
-    </main>
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-      crossorigin="anonymous"></script>
-
-    <script src="./public/js/index.js" type="module"></script>
-  </body>
 </html>
