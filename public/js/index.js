@@ -14,16 +14,30 @@ Template.loadTemplates().then( () => {
 
         recipes = Factory.createRecipes(jsonData.recipes);
     
+        displayIngredients();
         displayFilters();
+        displayUstensils();
 
         console.log(recipes);
     });
 });
 
+function displayIngredients () {
+    let ingredients = getIngredients();
+    let filterIngredients = new Filter("Ingrédients", ingredients);
+    genFilters.insertAdjacentHTML('beforeend', filterIngredients.displayFilter());
+}
+
 function displayFilters () {
     let appliances = getAppliances();
     let filterAppliances = new Filter("Appareils", appliances);
     genFilters.insertAdjacentHTML('beforeend', filterAppliances.displayFilter());
+}
+
+function displayUstensils () {
+    let ustensils = getUstensils();
+    let filterUstensils = new Filter("Ustensils", ustensils);
+    genFilters.insertAdjacentHTML('beforeend', filterUstensils.displayFilter());
 }
 
 // compute appliance 
