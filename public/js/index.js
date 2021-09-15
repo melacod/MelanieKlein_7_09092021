@@ -33,12 +33,14 @@ function displayFilters () {
     let appliances = getAppliances();
     let filterAppliances = new Filter("Appareils", appliances);
     genFilters.insertAdjacentHTML('beforeend', filterAppliances.displayFilter());
+    filterAppliances.addStaticEvents();
 }
 
 function displayUstensils () {
     let ustensils = getUstensils();
     let filterUstensils = new Filter("Ustensils", ustensils);
     genFilters.insertAdjacentHTML('beforeend', filterUstensils.displayFilter());
+    filterUstensils.addStaticEvents();
 }
 
 // compute appliance 
