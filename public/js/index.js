@@ -26,6 +26,7 @@ function displayIngredients () {
     let ingredients = getIngredients();
     let filterIngredients = new Filter("Ingrédients", ingredients);
     genFilters.insertAdjacentHTML('beforeend', filterIngredients.displayFilter());
+    filterIngredients.addStaticEvents();
 }
 
 function displayFilters () {
