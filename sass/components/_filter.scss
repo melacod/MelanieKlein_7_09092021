@@ -37,3 +37,13 @@
 
 
 }
+
+.filters {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.filter--container {
+    width: 170px ;
+    padding-bottom: 0.5em;
+}
