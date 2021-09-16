@@ -5,6 +5,7 @@ import { Template } from "./modules/template.js";
 
 // dom elements
 const genFilters = document.querySelector('#gen-filters');
+const genTags = document.querySelector('#gen-tags');
 
 // created recipes
 let recipes = [] ;
@@ -24,21 +25,21 @@ Template.loadTemplates().then( () => {
 
 function displayIngredients () {
     let ingredients = getIngredients();
-    let filterIngredients = new Filter("Ingrédients", ingredients);
+    let filterIngredients = new Filter("Ingrédients", ingredients, genTags, 'primary');
     genFilters.insertAdjacentHTML('beforeend', filterIngredients.displayFilter());
     filterIngredients.addStaticEvents();
 }
 
 function displayFilters () {
     let appliances = getAppliances();
-    let filterAppliances = new Filter("Appareils", appliances);
+    let filterAppliances = new Filter("Appareils", appliances, genTags, 'success');
     genFilters.insertAdjacentHTML('beforeend', filterAppliances.displayFilter());
     filterAppliances.addStaticEvents();
 }
 
 function displayUstensils () {
     let ustensils = getUstensils();
-    let filterUstensils = new Filter("Ustensils", ustensils);
+    let filterUstensils = new Filter("Ustensils", ustensils, genTags, 'danger');
     genFilters.insertAdjacentHTML('beforeend', filterUstensils.displayFilter());
     filterUstensils.addStaticEvents();
 }

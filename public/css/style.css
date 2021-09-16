@@ -11113,6 +11113,10 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.btn--nopointer {
+  pointer-events: none;
+}
+
 .logo {
   height: 100px;
 }
@@ -11126,22 +11130,25 @@ textarea.form-control-lg {
   min-width: 300px;
   max-width: 700px;
 }
-.filter--items {
+.filter--options {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   overflow: auto;
   max-height: 400px;
 }
-.filter--item {
+.filter--option {
   width: 30%;
   padding: 10px;
   vertical-align: middle;
   cursor: pointer;
 }
-.filter--item:hover {
+.filter--option:hover {
   color: black;
   background-color: lightgray;
+}
+.filter--option--hide {
+  display: none;
 }
 .filter--input::placeholder {
   color: white;

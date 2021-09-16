@@ -2,22 +2,22 @@
 
     <div id="{name}" class="filter--container">
 
-        <button class="btn btn-primary p-3 filter--button">
+        <button class="btn btn-{className} p-3 filter--button">
             {name} <i class="bi bi-caret-down-fill"></i>
         </button>
 
         <div class="filter--selection">
 
             <div class="input-group">
-                <input type="text" class="form-control bg-primary text-white p-3 filter--input"
+                <input type="text" class="form-control bg-{className} text-white p-3 filter--input"
                     placeholder="Rechercher un {item}" aria-label="Rechercher un {item}"
                     aria-describedby="{item}-icon" />
-                <span id="{item}--icon" class="input-group-text filter--icon bg-primary text-white">
+                <span id="{item}--icon" class="input-group-text filter--icon bg-{className} text-white">
                     <i class="bi bi-caret-up-fill "></i>
                 </span>
             </div>
 
-            <ul class="input-group-text filter--items bg-primary text-white">
+            <ul class="input-group-text filter--options bg-{className} text-white">
                 {htmlOptions}
             </ul>
         </div>

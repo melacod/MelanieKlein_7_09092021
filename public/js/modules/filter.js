@@ -4,10 +4,12 @@ export { Filter };
 
 class Filter {
 
-    constructor (name, options) {
+    constructor (name, options, parentTagElement, className) {
         this.name = name;
-        this.options = options;
         this.item = name.toLowerCase().slice(0, name.length -1);
+        this.options = options;
+        this.parentTagElement = parentTagElement;
+        this.className = className;
     }
 
     displayFilter () {
@@ -29,13 +31,17 @@ class Filter {
         const btnOpenFilter = document.querySelector('#'+this.name+' .btn');
         const listFilters = document.querySelector('#'+this.name+' .filter--selection');
         const btnCloseFilter = document.querySelector('#'+this.item+'--icon');
-
+        const options = document.querySelectorAll('#'+this.name+' .filter--option');
+        
         listFilters.style.display = 'none';
         btnOpenFilter.style.display= "block";
 
         // add listener events to filter
         btnOpenFilter.addEventListener("click", function (event) { this.openFilter(event)}.bind(this));
         btnCloseFilter.addEventListener("click", function(event) { this.closeFilter(event)}.bind(this));
+        for (let option of options) {
+            option.addEventListener("click", function(event) { this.selectOption(event)}.bind(this));
+        }
         
     }
 
@@ -58,6 +64,36 @@ class Filter {
         listFilters.style.display = "none";
         btnOpenFilter.style.display = "block";
     }
-    
 
+    // select an item
+    selectOption (event) {
+        let selectedOption = event.target;
+        let optionName = selectedOption.textContent;
+
+        // hide option from filter
+        selectedOption.classList.add('filter--option--hide');
+
+        // create option button in DOM
+        let tagObject = { optionName : optionName , className : this.className };
+        this.parentTagElement.insertAdjacentHTML('beforeend', Template.fillTemplate('tag', tagObject));
+
+        let optionButton = this.parentTagElement.querySelector('[data-option="'+optionName+'"]');
+        optionButton.addEventListener("click", function(event) { this.removeOption(event)}.bind(this));
+    }
+
+    removeOption (event) {
+        let optionName = event.target.dataset.option;
+        
+        // remove option button from DOM
+        event.target.remove();
+
+        // display option in filter
+        const options = document.querySelectorAll('#'+this.name+' .filter--option');
+        for (let option of options) {
+            if (option.dataset.option === optionName) {
+                option.classList.remove('filter--option--hide');
+                break;
+            }
+        }
+    }
 }
