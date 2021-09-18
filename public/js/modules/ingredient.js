@@ -8,5 +8,9 @@ class Ingredient {
         this.name = ingredient;
         this.quantity = quantity;
         this.unit = unit;
+        this.separator = '';
+        if (this.quantity !== undefined){
+            this.separator = ': ';
+        }
     }
 }

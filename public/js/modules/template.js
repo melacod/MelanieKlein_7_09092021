@@ -5,7 +5,7 @@ class Template {
      // load all template HTML files
      static async loadTemplates () {
         Template.templates = {};
-        for (let templateName of ['filter', 'filter-option', 'tag']) {
+        for (let templateName of ['filter', 'filter-option', 'tag', 'recipe', 'recipe-ingredient']) {
             Template.templates[templateName] = await Template.loadTemplate(templateName);
         }
      }
@@ -33,7 +33,7 @@ class Template {
         return templateContent.replace(
             /{(\w*)}/g, 
             function( m, key ) {
-                if (Object.prototype.hasOwnProperty.call(object, key)) {
+                if (Object.prototype.hasOwnProperty.call(object, key) && object[key] !== undefined) {
                     return object[key];
                 } else {
                     return "";

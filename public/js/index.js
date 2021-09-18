@@ -6,6 +6,7 @@ import { Template } from "./modules/template.js";
 // dom elements
 const genFilters = document.querySelector('#gen-filters');
 const genTags = document.querySelector('#gen-tags');
+const genRecipes = document.querySelector('#gen-recipes');
 
 // created recipes
 let recipes = [] ;
@@ -19,9 +20,17 @@ Template.loadTemplates().then( () => {
         displayFilters();
         displayUstensils();
 
+        displayRecipes();
+
         console.log(recipes);
     });
 });
+
+function displayRecipes () {
+    for (let recipe of recipes) {
+        genRecipes.insertAdjacentHTML('beforeend', recipe.displayRecipe());
+    }
+}
 
 function displayIngredients () {
     let ingredients = getIngredients();

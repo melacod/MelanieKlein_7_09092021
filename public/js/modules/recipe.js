@@ -1,4 +1,5 @@
 import { Ingredient } from "./ingredient.js";
+import { Template } from "./template.js";
 
 export { Recipe };
 
@@ -23,6 +24,18 @@ class Recipe {
         this.ustensils = ustensils;
     }
 
+    displayRecipe () {
+        this.htmlIngredients = this.displayRecipeIngredients();
+        return Template.fillTemplate('recipe', this);
+    }
+
+    displayRecipeIngredients () {
+        let htmlIngredients = "";
+        for (let ingredient of this.ingredients) {
+            htmlIngredients += Template.fillTemplate('recipe-ingredient', ingredient);
+        }
+        return htmlIngredients;
+    }
 
 
 }

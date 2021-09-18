@@ -1,0 +1,93 @@
+.recipes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    justify-items: flex-start;
+}
+
+.recipe {
+    width: 30%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    
+    &--image {
+        height: 180px;
+        background-color: #C7BEBE;
+    }
+
+    &--info {
+        background-color: #E7E7E7;
+        padding: 20px;
+        height: 180px;
+    }
+
+    &--title {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    &--name {
+        width: 70%;
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    &--time {
+        width: 30%;
+        text-align: right;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    &--content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    &--ingredients {
+        width: 50%;
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    &--description {
+        width: 50%;
+        overflow: hidden;
+        
+        //ellipsis on last line
+        display: -webkit-box;
+        -webkit-line-clamp: 10;
+        -webkit-box-orient: vertical;
+        
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+}
