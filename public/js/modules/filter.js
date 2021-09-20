@@ -47,6 +47,8 @@ class Filter {
 
     // open to filter
     openFilter (){ 
+        this.hideAllFilters();
+
         // DOM elements
         const btnOpenFilter = document.querySelector('#'+this.name+' .btn');
         const listFilters = document.querySelector('#'+this.name+' .filter--selection');
@@ -94,6 +96,17 @@ class Filter {
                 option.classList.remove('filter--option--hide');
                 break;
             }
+        }
+    }
+
+    hideAllFilters () {
+        let allFilterSelection = document.querySelectorAll('.filter--selection');
+        for (let filterSelection of allFilterSelection) {
+            filterSelection.style.display = 'none';
+        }
+        let allFilterButton = document.querySelectorAll('.filter--button');
+        for (let filterButton of allFilterButton) {
+            filterButton.style.display = 'block';
         }
     }
 }

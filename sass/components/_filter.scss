@@ -1,8 +1,31 @@
+.filters {
+    margin-bottom: 20px;
+}
+
+#gen-filters {
+    display: flex;
+    column-gap: 10px;
+
+    @include screen-max (mobile) {
+        flex-wrap: wrap;   
+        row-gap: 10px;
+    }
+}
+
 .filter {
 
     &--selection {
         min-width: 300px;
         max-width: 700px;
+
+        @include screen-max (tablet) {
+            min-width: 200px;
+            max-width: 300px;
+        }
+
+        @include screen-max (mobile) {
+            width: 100%;
+        }
     }
 
     &--options {
@@ -11,6 +34,10 @@
         list-style: none;
         overflow: auto;
         max-height: 400px;
+
+        @include screen-max (mobile) {
+            max-height: 200px;
+        }
     }
 
     &--option {
@@ -18,6 +45,10 @@
         padding: 10px;
         vertical-align: middle;
         cursor: pointer;
+
+        @include screen-max (tablet) {
+            width: 100%;
+        }
 
         &:hover {
             color: black;
@@ -30,21 +61,10 @@
 
     }
 
-
     &--input::placeholder {
         color: white;
     }
 
-
 }
 
-.filters {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-}
 
-.filter--container {
-    width: 170px ;
-    padding-bottom: 0.5em;
-}

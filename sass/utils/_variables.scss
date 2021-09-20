@@ -1,0 +1,25 @@
+// breakpoints
+
+$breakpoints: (
+  mobile: (
+    max: 767px,
+  ),
+  tablet: (
+    min: 768px,
+    max: 991px,
+  ),
+  desktop: (
+    min: 992px,
+    max: 1199px,
+  ),
+  large: (
+    min: 1200px,
+  ),
+);
+
+// override bootstrap default colors
+$primary: #3282F7;
+$success: #68D9A4;
+$danger: #ED6454;
+
+$light: #E7E7E7;
