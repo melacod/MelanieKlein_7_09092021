@@ -6,7 +6,7 @@
     display: flex;
     column-gap: 10px;
 
-    @include screen-max (mobile) {
+    @include media-breakpoint-down(md) {
         flex-wrap: wrap;   
         row-gap: 10px;
     }
@@ -14,16 +14,29 @@
 
 .filter {
 
+    @include media-breakpoint-down(md) {
+        width: 100%;
+    }
+
+    &--button {
+        @include media-breakpoint-down(md) {
+            width: 80%;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
     &--selection {
         min-width: 300px;
         max-width: 700px;
 
-        @include screen-max (tablet) {
+        @include media-breakpoint-only(lg) {
             min-width: 200px;
             max-width: 300px;
         }
 
-        @include screen-max (mobile) {
+        @include media-breakpoint-down(md) {
             width: 100%;
         }
     }
@@ -35,8 +48,13 @@
         overflow: auto;
         max-height: 400px;
 
-        @include screen-max (mobile) {
+        position: absolute;
+        z-index: 10;
+        width: 60%;
+
+        @include media-breakpoint-down(md) {
             max-height: 200px;
+            width: calc(100% - 24px);
         }
     }
 
@@ -46,7 +64,7 @@
         vertical-align: middle;
         cursor: pointer;
 
-        @include screen-max (tablet) {
+        @include media-breakpoint-down(lg) {
             width: 100%;
         }
 

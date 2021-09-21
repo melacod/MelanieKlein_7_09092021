@@ -4,6 +4,8 @@
 @import "./utils/mixins";
 @import "./utils/variables";
 
+@import "../node_modules/bootstrap/scss/bootstrap";
+
 @import "./components/button";
 @import "./components/logo";
 @import "./components/navbar";
@@ -11,4 +13,4 @@
 @import "./components/recipe";
 @import "./components/tag";
 
-@import "../node_modules/bootstrap/scss/bootstrap";
+
