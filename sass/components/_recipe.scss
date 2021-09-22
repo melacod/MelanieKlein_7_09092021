@@ -11,12 +11,12 @@
     border-radius: 5px;
     margin-bottom: 20px;
     
-    @include screen-max (desktop) {
+    @include media-breakpoint-down (xl) {
         width: 50%;
         padding: 1em;
     }
 
-    @include screen-max (tablet) {
+    @include media-breakpoint-down (md) {
         width: 100%;
     }
      
