@@ -1,10 +1,12 @@
 import { Template } from "./template.js";
+import { Utils } from "./utils.js";
 
 export { Filter };
 
 class Filter {
 
-    constructor (name, options, parentTagElement, className) {
+    constructor (recipeFinder, name, options, parentTagElement, className) {
+        this.recipeFinder = recipeFinder;
         this.name = name;
         this.item = name.toLowerCase().slice(0, name.length -1);
         this.options = options;
@@ -32,6 +34,7 @@ class Filter {
         const listFilters = document.querySelector('#'+this.name+' .filter--selection');
         const btnCloseFilter = document.querySelector('#'+this.item+'--icon');
         const options = document.querySelectorAll('#'+this.name+' .filter--option');
+        const searchOptions = document.querySelector('#'+this.name+' .filter--input');
         
         listFilters.style.display = 'none';
         btnOpenFilter.style.display= "block";
@@ -42,7 +45,7 @@ class Filter {
         for (let option of options) {
             option.addEventListener("click", function(event) { this.selectOption(event)}.bind(this));
         }
-        
+        searchOptions.addEventListener('keyup', function(event) { this.searchOptions(event)}.bind(this));
     }
 
     // open to filter
@@ -81,6 +84,8 @@ class Filter {
 
         let optionButton = this.parentTagElement.querySelector('[data-option="'+optionName+'"]');
         optionButton.addEventListener("click", function(event) { this.removeOption(event)}.bind(this));
+
+        this.recipeFinder.searchRecipes();
     }
 
     removeOption (event) {
@@ -95,6 +100,22 @@ class Filter {
             if (option.dataset.option === optionName) {
                 option.classList.remove('filter--option--hide');
                 break;
+            }
+        }
+        this.recipeFinder.searchRecipes();
+    }
+
+    searchOptions (event) {
+        let searchOption = this.cleanText(event.target.value);
+        console.log(searchOption);
+
+        const options = document.querySelectorAll('#'+this.name+' .filter--option');
+        for (let option of options) {
+            let cleanOption = Utils.cleanText(option.dataset.option);
+            if (cleanOption.indexOf(searchOption) >= 0 || searchOption == "") { 
+                option.classList.remove('filter--option--hide');
+            } else {
+                option.classList.add ('filter--option--hide');
             }
         }
     }

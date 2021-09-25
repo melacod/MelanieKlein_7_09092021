@@ -1,6 +1,7 @@
 import { Data } from "./modules/data.js";
 import { Factory } from "./modules/factory.js";
 import { Filter } from "./modules/filter.js";
+import { RecipeFinder } from "./modules/recipeFinder.js";
 import { Template } from "./modules/template.js";
 
 // dom elements
@@ -10,14 +11,17 @@ const genRecipes = document.querySelector('#gen-recipes');
 
 // created recipes
 let recipes = [] ;
+let recipeFinder = undefined;
 
 Template.loadTemplates().then( () => {
     Data.loadJsonData().then( (jsonData) => {
 
         recipes = Factory.createRecipes(jsonData.recipes);
+
+        recipeFinder = new RecipeFinder(recipes);
     
         displayIngredients();
-        displayFilters();
+        displayAppliances();
         displayUstensils();
 
         displayRecipes();
@@ -34,21 +38,21 @@ function displayRecipes () {
 
 function displayIngredients () {
     let ingredients = getIngredients();
-    let filterIngredients = new Filter("Ingrédients", ingredients, genTags, 'primary');
+    let filterIngredients = new Filter(recipeFinder, "Ingrédients", ingredients, genTags, 'primary');
     genFilters.insertAdjacentHTML('beforeend', filterIngredients.displayFilter());
     filterIngredients.addStaticEvents();
 }
 
-function displayFilters () {
+function displayAppliances () {
     let appliances = getAppliances();
-    let filterAppliances = new Filter("Appareils", appliances, genTags, 'success');
+    let filterAppliances = new Filter(recipeFinder, "Appareils", appliances, genTags, 'success');
     genFilters.insertAdjacentHTML('beforeend', filterAppliances.displayFilter());
     filterAppliances.addStaticEvents();
 }
 
 function displayUstensils () {
     let ustensils = getUstensils();
-    let filterUstensils = new Filter("Ustensils", ustensils, genTags, 'danger');
+    let filterUstensils = new Filter(recipeFinder, "Ustensils", ustensils, genTags, 'danger');
     genFilters.insertAdjacentHTML('beforeend', filterUstensils.displayFilter());
     filterUstensils.addStaticEvents();
 }
