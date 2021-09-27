@@ -107,7 +107,6 @@ class Filter {
 
     searchOptions (event) {
         let searchOption = this.cleanText(event.target.value);
-        console.log(searchOption);
 
         const options = document.querySelectorAll('#'+this.name+' .filter--option');
         for (let option of options) {
