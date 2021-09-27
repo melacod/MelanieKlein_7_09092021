@@ -76,7 +76,7 @@ class Filter {
         let optionName = selectedOption.textContent;
 
         // hide option from filter
-        selectedOption.classList.add('filter--option--hide');
+        selectedOption.classList.add('filter--option--selected');
 
         // create option button in DOM
         let tagObject = { optionName : optionName , className : this.className };
@@ -85,6 +85,7 @@ class Filter {
         let optionButton = this.parentTagElement.querySelector('[data-option="'+optionName+'"]');
         optionButton.addEventListener("click", function(event) { this.removeOption(event)}.bind(this));
 
+        this.searchOptions();
         this.recipeFinder.searchRecipes();
     }
 
@@ -98,21 +99,30 @@ class Filter {
         const options = document.querySelectorAll('#'+this.name+' .filter--option');
         for (let option of options) {
             if (option.dataset.option === optionName) {
-                option.classList.remove('filter--option--hide');
+                option.classList.remove('filter--option--selected');
                 break;
             }
         }
+        this.searchOptions();
         this.recipeFinder.searchRecipes();
     }
 
-    searchOptions (event) {
-        let searchOption = this.cleanText(event.target.value);
-
+    searchOptions () {
+        const text = document.querySelector('#'+this.name+' .filter--input').value;
         const options = document.querySelectorAll('#'+this.name+' .filter--option');
         for (let option of options) {
             let cleanOption = Utils.cleanText(option.dataset.option);
-            if (cleanOption.indexOf(searchOption) >= 0 || searchOption == "") { 
+
+            // Hide option is already selected
+            let isOptionSelected = option.classList.contains('filter--option--selected');
+            if (isOptionSelected) {
+                option.classList.add ('filter--option--hide');
+
+            // Display option if searched text in option or no searched text
+            } else if (cleanOption.indexOf(text) >= 0 || text == "") { 
                 option.classList.remove('filter--option--hide');
+
+            // Hide option in other case
             } else {
                 option.classList.add ('filter--option--hide');
             }

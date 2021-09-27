@@ -3,7 +3,7 @@ export { Utils };
 // utility functions
 class Utils {
 
-    cleanText (inputText) {
+    static cleanText (inputText) {
         let cleanText = inputText.toLowerCase().trim();
 
         cleanText = cleanText.replaceAll("à","a");

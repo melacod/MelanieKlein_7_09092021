@@ -9,7 +9,6 @@ class RecipeFinder {
     // 
     searchRecipes () {
 
-        console.log("ccc");
         /*
         let input = document.getElementById('searchbar').value
         input = input.toLowerCase();
