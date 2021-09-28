@@ -115,9 +115,11 @@ class Filter {
 
         const text = document.querySelector('#'+this.name+' .filter--input').value;
         const options = document.querySelectorAll('#'+this.name+' .filter--option');
-
+        const words = text.split(" ");
+        
         for (let option of options) {
             let cleanOption = Utils.cleanText(option.dataset.option);
+            const isWordPresent = (word) => cleanOption.indexOf(word) >= 0;
 
             // Hide option is already selected
             let isOptionSelected = option.classList.contains('filter--option--selected');
@@ -126,7 +128,7 @@ class Filter {
                 option.classList.add ('filter--option--hide');
 
             // Display option if searched text in option or no searched text
-            } else if (cleanOption.indexOf(text) >= 0 || text == "") { 
+            } else if (text == "" || words.every(isWordPresent)) { 
                 option.classList.remove('filter--option--hide');
 
             // Hide option in other case
