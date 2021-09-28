@@ -17,6 +17,15 @@ class RecipeFinder {
     // 
     searchRecipes () {
 
+        let selectedIngredients = this.filterIngredients.getSelectedOptions();
+        console.log(selectedIngredients);
+
+        let selectedAppliances = this.filterAppliances.getSelectedOptions();
+        console.log(selectedAppliances);
+
+        let selectedUstensils = this.filterUstensils.getSelectedOptions();
+        console.log(selectedUstensils);
+        
         /*
         let input = document.getElementById('searchbar').value
         input = input.toLowerCase();

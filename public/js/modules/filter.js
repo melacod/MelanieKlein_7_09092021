@@ -11,6 +11,7 @@ class Filter {
         this.options = options;
         this.parentTagElement = parentTagElement;
         this.className = className;
+        this.selectedOptions = new Set ();
     }
 
     linkRecipeFinder (recipeFinder) {
@@ -89,7 +90,7 @@ class Filter {
         optionButton.addEventListener("click", function(event) { this.removeOption(event)}.bind(this));
 
         this.searchOptions();
-        this.recipeFinder.searchRecipes();
+        
     }
 
     removeOption (event) {
@@ -107,18 +108,21 @@ class Filter {
             }
         }
         this.searchOptions();
-        this.recipeFinder.searchRecipes();
     }
 
     searchOptions () {
+        this.selectedOptions.clear();
+
         const text = document.querySelector('#'+this.name+' .filter--input').value;
         const options = document.querySelectorAll('#'+this.name+' .filter--option');
+
         for (let option of options) {
             let cleanOption = Utils.cleanText(option.dataset.option);
 
             // Hide option is already selected
             let isOptionSelected = option.classList.contains('filter--option--selected');
             if (isOptionSelected) {
+                this.selectedOptions.add(cleanOption);
                 option.classList.add ('filter--option--hide');
 
             // Display option if searched text in option or no searched text
@@ -130,6 +134,11 @@ class Filter {
                 option.classList.add ('filter--option--hide');
             }
         }
+        this.recipeFinder.searchRecipes();
+    }
+
+    getSelectedOptions () {
+        return this.selectedOptions;
     }
 
     hideAllFilters () {
@@ -143,7 +152,4 @@ class Filter {
         }
     }
 
-    getSelectedOptions () {
-        
-    }
 }
