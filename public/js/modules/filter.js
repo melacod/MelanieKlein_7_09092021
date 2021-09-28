@@ -142,4 +142,8 @@ class Filter {
             filterButton.style.display = 'block';
         }
     }
+
+    getSelectedOptions () {
+        
+    }
 }
