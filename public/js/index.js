@@ -17,73 +17,11 @@ Template.loadTemplates().then( () => {
     Data.loadJsonData().then( (jsonData) => {
 
         recipes = Factory.createRecipes(jsonData.recipes);
-
-        recipeFinder = new RecipeFinder(recipes);
-    
-        displayIngredients();
-        displayAppliances();
-        displayUstensils();
-
-        displayRecipes();
-
+        
+        recipeFinder = new RecipeFinder(recipes, genFilters, genTags, genRecipes);
+        recipeFinder.displayFilters();
+        recipeFinder.displayRecipes();
+        
         console.log(recipes);
     });
 });
-
-function displayRecipes () {
-    for (let recipe of recipes) {
-        genRecipes.insertAdjacentHTML('beforeend', recipe.displayRecipe());
-    }
-}
-
-function displayIngredients () {
-    let ingredients = getIngredients();
-    let filterIngredients = new Filter(recipeFinder, "Ingrédients", ingredients, genTags, 'primary');
-    genFilters.insertAdjacentHTML('beforeend', filterIngredients.displayFilter());
-    filterIngredients.addStaticEvents();
-}
-
-function displayAppliances () {
-    let appliances = getAppliances();
-    let filterAppliances = new Filter(recipeFinder, "Appareils", appliances, genTags, 'success');
-    genFilters.insertAdjacentHTML('beforeend', filterAppliances.displayFilter());
-    filterAppliances.addStaticEvents();
-}
-
-function displayUstensils () {
-    let ustensils = getUstensils();
-    let filterUstensils = new Filter(recipeFinder, "Ustensils", ustensils, genTags, 'danger');
-    genFilters.insertAdjacentHTML('beforeend', filterUstensils.displayFilter());
-    filterUstensils.addStaticEvents();
-}
-
-// compute appliance 
-function getAppliances () {
-    let appliances = new Set();
-    for (let recipe of recipes) {
-        appliances.add(recipe.appliance);
-    }
-    return appliances;
-}
-
-// compute ustensils
-function getUstensils () {
-    let ustensils = new Set ();
-    for (let recipe of recipes) {
-        for ( let ustensil of recipe.ustensils) {
-            ustensils.add(ustensil);
-        }
-    }
-    return ustensils;
-}
-
-// compute ingredients
-function getIngredients () {
-    let ingredients = new Set ();
-    for (let recipe of recipes) {
-        for ( let ingredient of recipe.ingredients) {
-            ingredients.add(ingredient.name);
-        }
-    }
-    return ingredients;
-}

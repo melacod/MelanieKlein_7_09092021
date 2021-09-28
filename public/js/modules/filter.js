@@ -5,13 +5,16 @@ export { Filter };
 
 class Filter {
 
-    constructor (recipeFinder, name, options, parentTagElement, className) {
-        this.recipeFinder = recipeFinder;
+    constructor (name, options, parentTagElement, className) {
         this.name = name;
         this.item = name.toLowerCase().slice(0, name.length -1);
         this.options = options;
         this.parentTagElement = parentTagElement;
         this.className = className;
+    }
+
+    linkRecipeFinder (recipeFinder) {
+        this.recipeFinder = recipeFinder;
     }
 
     displayFilter () {
