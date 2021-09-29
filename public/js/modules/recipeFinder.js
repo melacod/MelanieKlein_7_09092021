@@ -9,36 +9,35 @@ class RecipeFinder {
         this.genFilters = genFilters;
         this.genTags = genTags;
         this.genRecipes = genRecipes;
+        this.searchText = "";
         this.createFilterIngredients();
         this.createFilterAppliances();
         this.createFilterUstensils();
     }
     
-    // 
+    addStaticEvents () {
+        const navSearch = document.querySelector('#navSearch');
+        navSearch.addEventListener("keyup", function(event) { this.changeSearchText(event)}.bind(this));
+    } 
+
+    changeSearchText (event) {
+        this.searchText = event.target.value;
+        this.searchRecipes();
+    } 
+
     searchRecipes () {
+        console.log("Search recipes with parameters");
+        console.log(" - Search text: " + this.searchText);
 
         let selectedIngredients = this.filterIngredients.getSelectedOptions();
-        console.log(selectedIngredients);
+        console.log(" - Ingredients: ", selectedIngredients);
 
         let selectedAppliances = this.filterAppliances.getSelectedOptions();
-        console.log(selectedAppliances);
+        console.log(" - Appliances: ", selectedAppliances);
 
         let selectedUstensils = this.filterUstensils.getSelectedOptions();
-        console.log(selectedUstensils);
+        console.log(" - Ustensils: ", selectedUstensils);
         
-        /*
-        let input = document.getElementById('searchbar').value
-        input = input.toLowerCase();
-        let x = document.getElementsByClassName('recipe--title');
-          
-        for (i = 0; i < x.length; i++) { 
-            if (!x[i].innerHTML.toLowerCase().includes(input)) {
-                x[i].style.display="none";
-            }
-            else {
-                x[i].style.display="recipe";                 
-            }
-        }*/
     }
 
     // compute ingredients

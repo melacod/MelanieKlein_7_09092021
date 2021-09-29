@@ -11148,6 +11148,9 @@ textarea.form-control-lg {
     width: 100%;
   }
 }
+.filter--button {
+  color: white;
+}
 @media (max-width: 767.98px) {
   .filter--button {
     width: 80%;

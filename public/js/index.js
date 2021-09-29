@@ -21,7 +21,8 @@ Template.loadTemplates().then( () => {
         recipeFinder = new RecipeFinder(recipes, genFilters, genTags, genRecipes);
         recipeFinder.displayFilters();
         recipeFinder.displayRecipes();
-        
+        recipeFinder.addStaticEvents();
+
         console.log(recipes);
     });
 });
