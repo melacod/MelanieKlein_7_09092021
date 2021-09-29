@@ -1,4 +1,5 @@
 import { Filter } from "./filter.js";
+import { Utils } from "./utils.js";
 
 export { RecipeFinder };
 
@@ -10,6 +11,7 @@ class RecipeFinder {
         this.genTags = genTags;
         this.genRecipes = genRecipes;
         this.searchText = "";
+        this.matchRecipes = [];
         this.createFilterIngredients();
         this.createFilterAppliances();
         this.createFilterUstensils();
@@ -26,6 +28,25 @@ class RecipeFinder {
     } 
 
     searchRecipes () {
+
+        this.matchRecipes = [];
+
+        const moreThanThreeCharacters = this.searchText.length >= 3;
+        const searchWords = Utils.cleanText(this.searchText).split(" "); 
+
+        for (let recipe of this.recipes) {
+            
+            if (moreThanThreeCharacters) {
+                const text = Utils.cleanText(recipe.name + " " + recipe.description);
+                const isWordPresent = (word) => text.indexOf(word) >= 0;
+                if (searchWords.every(isWordPresent)) {
+                    this.matchRecipes.push(recipe);
+                }
+            } else {
+                this.matchRecipes.push(recipe);
+            }
+        }
+
         console.log("Search recipes with parameters");
         console.log(" - Search text: " + this.searchText);
 
@@ -37,7 +58,9 @@ class RecipeFinder {
 
         let selectedUstensils = this.filterUstensils.getSelectedOptions();
         console.log(" - Ustensils: ", selectedUstensils);
-        
+
+        console.log(this.matchRecipes);
+        this.displayMatchRecipes();
     }
 
     // compute ingredients
@@ -112,6 +135,13 @@ class RecipeFinder {
 
     displayRecipes () {
         for (let recipe of this.recipes) {
+            this.genRecipes.insertAdjacentHTML('beforeend', recipe.displayRecipe());
+        }
+    }
+
+    displayMatchRecipes () {
+        this.genRecipes.innerHTML = "";
+        for (let recipe of this.matchRecipes) {
             this.genRecipes.insertAdjacentHTML('beforeend', recipe.displayRecipe());
         }
     }
