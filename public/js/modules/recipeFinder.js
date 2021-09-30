@@ -37,8 +37,7 @@ class RecipeFinder {
         for (let recipe of this.recipes) {
             
             if (moreThanThreeCharacters) {
-                const text = Utils.cleanText(recipe.name + " " + recipe.description);
-                const isWordPresent = (word) => text.indexOf(word) >= 0;
+                const isWordPresent = (word) => recipe.getText().indexOf(word) >= 0;
                 if (searchWords.every(isWordPresent)) {
                     this.matchRecipes.push(recipe);
                 }

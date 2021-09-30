@@ -1,5 +1,6 @@
 import { Ingredient } from "./ingredient.js";
 import { Template } from "./template.js";
+import { Utils } from "./utils.js";
 
 export { Recipe };
 
@@ -35,6 +36,14 @@ class Recipe {
             htmlIngredients += Template.fillTemplate('recipe-ingredient', ingredient);
         }
         return htmlIngredients;
+    }
+
+    getText () {
+        let text = Utils.cleanText(this.name + " " + this.description);
+        for (let ingredient of this.ingredients) {
+            text += Utils.cleanText(" " + ingredient.name); 
+        }
+        return text;
     }
 
 }
