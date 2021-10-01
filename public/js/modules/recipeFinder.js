@@ -12,9 +12,7 @@ class RecipeFinder {
         this.genRecipes = genRecipes;
         this.searchText = "";
         this.matchRecipes = [];
-        this.createFilterIngredients();
-        this.createFilterAppliances();
-        this.createFilterUstensils();
+        this.createFilters();
     }
     
     addStaticEvents () {
@@ -24,13 +22,15 @@ class RecipeFinder {
 
     changeSearchText (event) {
         this.searchText = event.target.value;
-        this.searchRecipes();
+        this.searchRecipesWithNavbar();
     } 
 
-    searchRecipes () {
+    searchRecipesWithNavbar () {
+
+        console.log("Search recipes with navbar");
+        console.log(" - Search text: " + this.searchText);
 
         this.matchRecipes = [];
-
         const moreThanThreeCharacters = this.searchText.length >= 3;
         const searchWords = Utils.cleanText(this.searchText).split(" "); 
 
@@ -44,48 +44,58 @@ class RecipeFinder {
             } else {
                 this.matchRecipes.push(recipe);
             }
+           
         }
 
-        console.log("Search recipes with parameters");
-        console.log(" - Search text: " + this.searchText);
+        let newIngredients = this.getUniqueIngredients(this.matchRecipes);
+        let newAppliances = this.getUniqueAppliances(this.matchRecipes);
+        let newUstensils = this.getUniqueUstensils(this.matchRecipes);
+        
+        this.filterIngredients.updateOptions(newIngredients);
+        this.filterAppliances.updateOptions(newAppliances);
+        this.filterUstensils.updateOptions(newUstensils);
 
-        let selectedIngredients = this.filterIngredients.getSelectedOptions();
-        console.log(" - Ingredients: ", selectedIngredients);
-
-        let selectedAppliances = this.filterAppliances.getSelectedOptions();
-        console.log(" - Appliances: ", selectedAppliances);
-
-        let selectedUstensils = this.filterUstensils.getSelectedOptions();
-        console.log(" - Ustensils: ", selectedUstensils);
-
-        console.log(this.matchRecipes);
-        this.displayMatchRecipes();
+        this.displayFilters();
+        this.displayRecipes(this.matchRecipes);
     }
 
-    // compute ingredients
-    getUniqueIngredients () {
+    searchRecipesWithFilters () {
+        console.log("Search recipes with filters");
+        
+        let selectedIngredients = this.filterIngredients.getSelectedOptions();
+        let selectedAppliances = this.filterAppliances.getSelectedOptions();
+        let selectedUstensils = this.filterUstensils.getSelectedOptions();
+
+        console.log(" - Appliances: ", selectedAppliances);
+        console.log(" - Ingredients: ", selectedIngredients);
+        console.log(" - Ustensils: ", selectedUstensils);
+
+    }
+
+    // Get unique options ****************************************************************************
+
+    
+    getUniqueIngredients (recipes) {
         let ingredients = new Set ();
-        for (let recipe of this.recipes) {
+        for (let recipe of recipes) {
             for (let ingredient of recipe.ingredients) {
                 ingredients.add(ingredient.name);
             }
         }
         return ingredients;
     }
-
-    // compute appliance 
-    getUniqueAppliances () {
+    
+    getUniqueAppliances (recipes) {
         let appliances = new Set();
-        for (let recipe of this.recipes) {
+        for (let recipe of recipes) {
             appliances.add(recipe.appliance);
         }
         return appliances;
     }
 
-    // compute ustensils
-    getUniqueUstensils () {
+    getUniqueUstensils (recipes) {
         let ustensils = new Set ();
-        for (let recipe of this.recipes) {
+        for (let recipe of recipes) {
             for ( let ustensil of recipe.ustensils) {
                 ustensils.add(ustensil);
             }
@@ -93,32 +103,50 @@ class RecipeFinder {
         return ustensils;
     }
 
+    // Create filters ****************************************************************************
+
+    createFilters () {
+        this.createFilterIngredients();
+        this.createFilterAppliances();
+        this.createFilterUstensils();
+    }
+
     createFilterIngredients () {
-        let ingredients = this.getUniqueIngredients();
+        let ingredients = this.getUniqueIngredients(this.recipes);
         this.filterIngredients = new Filter("Ingrédients", ingredients, this.genTags, 'primary');
         this.filterIngredients.linkRecipeFinder(this);
     }
     
+    createFilterAppliances () {
+        let appliances = this.getUniqueAppliances(this.recipes);
+        this.filterAppliances = new Filter("Appareils", appliances, this.genTags, 'success');
+        this.filterAppliances.linkRecipeFinder(this);
+    }
+    
+    createFilterUstensils () {
+        let ustensils = this.getUniqueUstensils(this.recipes);
+        this.filterUstensils = new Filter( "Ustensils", ustensils, this.genTags, 'danger');
+        this.filterUstensils.linkRecipeFinder(this);
+    }
+
+    // Display filters ****************************************************************************
+    
+    displayFilters () {
+        this.genTags.innerHTML = "";
+        this.genFilters.innerHTML = "";
+        this.displayFilterIngredients();
+        this.displayFilterAppliances();
+        this.displayFilterUstensils();
+    }
+
     displayFilterIngredients () {
         this.genFilters.insertAdjacentHTML('beforeend', this.filterIngredients.displayFilter());
         this.filterIngredients.addStaticEvents();
     }
 
-    createFilterAppliances () {
-        let appliances = this.getUniqueAppliances();
-        this.filterAppliances = new Filter("Appareils", appliances, this.genTags, 'success');
-        this.filterAppliances.linkRecipeFinder(this);
-    }
-    
     displayFilterAppliances () {
         this.genFilters.insertAdjacentHTML('beforeend', this.filterAppliances.displayFilter());
         this.filterAppliances.addStaticEvents();
-    }
-    
-    createFilterUstensils () {
-        let ustensils = this.getUniqueUstensils();
-        this.filterUstensils = new Filter( "Ustensils", ustensils, this.genTags, 'danger');
-        this.filterUstensils.linkRecipeFinder(this);
     }
 
     displayFilterUstensils () {
@@ -126,22 +154,17 @@ class RecipeFinder {
         this.filterUstensils.addStaticEvents();
     }
 
-    displayFilters () {
-        this.displayFilterIngredients();
-        this.displayFilterAppliances();
-        this.displayFilterUstensils();
+    // Display recipes ****************************************************************************
+
+    displayAllRecipes () {
+        this.displayRecipes(this.recipes);
     }
 
-    displayRecipes () {
-        for (let recipe of this.recipes) {
-            this.genRecipes.insertAdjacentHTML('beforeend', recipe.displayRecipe());
-        }
-    }
-
-    displayMatchRecipes () {
+    displayRecipes (recipes) {
         this.genRecipes.innerHTML = "";
-        for (let recipe of this.matchRecipes) {
+        for (let recipe of recipes) {
             this.genRecipes.insertAdjacentHTML('beforeend', recipe.displayRecipe());
         }
     }
+
 }

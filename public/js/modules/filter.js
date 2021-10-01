@@ -14,6 +14,10 @@ class Filter {
         this.selectedOptions = new Set ();
     }
 
+    updateOptions (newOptions) {
+        this.options = newOptions;
+    }
+
     linkRecipeFinder (recipeFinder) {
         this.recipeFinder = recipeFinder;
     }
@@ -136,7 +140,7 @@ class Filter {
                 option.classList.add ('filter--option--hide');
             }
         }
-        this.recipeFinder.searchRecipes();
+        this.recipeFinder.searchRecipesWithFilters();
     }
 
     getSelectedOptions () {
