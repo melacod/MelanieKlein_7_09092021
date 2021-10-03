@@ -165,6 +165,15 @@ class RecipeFinder {
         for (let recipe of recipes) {
             this.genRecipes.insertAdjacentHTML('beforeend', recipe.displayRecipe());
         }
+        this.noRecipeFoundDisplay(recipes);
+    }
+
+    noRecipeFoundDisplay (recipes) {
+        const msg = document.querySelector('#noRecipeMessage');
+        msg.style.display = "none";
+        if (recipes.length === 0) {
+            msg.style.display = "block";
+        }        
     }
 
 }

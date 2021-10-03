@@ -39,11 +39,11 @@ class Recipe {
     }
 
     getText () {
-        let text = Utils.cleanText(this.name + " " + this.description);
+        let text = this.name + " " + this.description;
         for (let ingredient of this.ingredients) {
-            text += Utils.cleanText(" " + ingredient.name); 
+            text += " " + ingredient.name; 
         }
-        return text;
+        return Utils.cleanText(text);
     }
 
 }
