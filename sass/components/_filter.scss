@@ -19,13 +19,15 @@
     }
 
     &--button {
+        color: white;
+
         @include media-breakpoint-down(md) {
             width: 80%;
             position: relative;
             left: 50%;
             transform: translateX(-50%);
         }
-        color: white;
+        
     }
 
     &--selection {

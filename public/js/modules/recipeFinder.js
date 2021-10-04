@@ -220,6 +220,7 @@ class RecipeFinder {
     // Display recipes ****************************************************************************
 
     displayAllRecipes () {
+        this.matchRecipes = this.recipes;
         this.displayRecipes(this.recipes);
     }
 

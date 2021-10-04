@@ -1,3 +1,4 @@
+import { Animation } from "./animation.js";
 import { Template } from "./template.js";
 import { Utils } from "./utils.js";
 
