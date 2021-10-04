@@ -66,7 +66,10 @@ class Filter {
         const listFilters = document.querySelector('#'+this.name+' .filter--selection');
 
         listFilters.style.display = 'block';
-        btnOpenFilter.style.display='none';
+        btnOpenFilter.style.display = 'none';
+
+        Animation.fadeIn(listFilters.querySelector('.filter--search'), 750, 0);
+        Animation.fadeIn(listFilters.querySelector('.filter--options'), 1000, 0);
     }
 
     //close to filter
@@ -77,6 +80,8 @@ class Filter {
 
         listFilters.style.display = "none";
         btnOpenFilter.style.display = "block";
+
+        Animation.fadeIn(btnOpenFilter, 750, 0);
     }
 
     // select an item
