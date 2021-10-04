@@ -128,7 +128,7 @@ class Filter {
             // Hide option is already selected
             let isOptionSelected = option.classList.contains('filter--option--selected');
             if (isOptionSelected) {
-                this.selectedOptions.add(cleanOption);
+                this.selectedOptions.add(option.dataset.option);
                 option.classList.add ('filter--option--hide');
 
             // Display option if searched text in option or no searched text

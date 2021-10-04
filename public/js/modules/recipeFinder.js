@@ -70,10 +70,73 @@ class RecipeFinder {
         console.log(" - Ingredients: ", selectedIngredients);
         console.log(" - Ustensils: ", selectedUstensils);
 
+        // array for filtered recipes
+        let filterRecipes = [];
+
+        // loop on each matching recipe
+        for (let matchRecipe of this.matchRecipes) {
+            
+            // indicate if the recipe check all filters
+            let isFilter = true;
+        
+            // check if all selected ingredients are present in ingredients of recipe
+            let ingredientsNames = matchRecipe.getIngredientsNames();
+            for (let selectedIngredient of selectedIngredients) {
+                let found = false;
+                for (let ingredientName of ingredientsNames) {
+                    if (selectedIngredient == ingredientName) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                   isFilter = false;
+                   break;
+                }
+            }
+            
+            // check if all selected appliances are present in appliance of recipe
+            if (isFilter) {
+                for (let selectedAppliance of selectedAppliances) {
+                    if (selectedAppliance !== matchRecipe.appliance) {
+                        isFilter = false;
+                        break;
+                    }
+                }
+            }
+
+            // check if all selected ustensils are present in ustensils of recipe
+            if (isFilter) {
+                for (let selectedUstensil of selectedUstensils) {
+                    let found = false;
+                    for (let ustensil of matchRecipe.ustensils) {
+                        if (selectedUstensil == ustensil) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        isFilter = false;
+                        break;
+                    }
+                }
+            }
+
+            // if recipe check all filters, add it to filtered recipes
+            if (isFilter) {
+                filterRecipes.push(matchRecipe);
+            }
+
+        }
+
+        // display all filtered recipes
+        this.displayRecipes(filterRecipes);
+
+        // display new filters based on filtered recipes
+
     }
 
     // Get unique options ****************************************************************************
-
     
     getUniqueIngredients (recipes) {
         let ingredients = new Set ();

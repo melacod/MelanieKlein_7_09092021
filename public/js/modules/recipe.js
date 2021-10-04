@@ -46,4 +46,12 @@ class Recipe {
         return Utils.cleanText(text);
     }
 
+    getIngredientsNames () {
+        let ingredientsNames = [];
+        for (let ingredient of this.ingredients) {
+            ingredientsNames.push(ingredient.name);
+        }
+        return ingredientsNames;
+    }
+    
 }
