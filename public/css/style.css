@@ -11135,6 +11135,7 @@ textarea.form-control-lg {
 #gen-filters {
   display: flex;
   column-gap: 10px;
+  margin-right: 30em;
 }
 @media (max-width: 767.98px) {
   #gen-filters {

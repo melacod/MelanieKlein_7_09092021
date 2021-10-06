@@ -27,25 +27,35 @@ class RecipeFinder {
 
     searchRecipesWithNavbar () {
 
+        
         console.log("Search recipes with navbar");
         console.log(" - Search text: " + this.searchText);
 
-        this.matchRecipes = [];
         const moreThanThreeCharacters = this.searchText.length >= 3;
+
+        this.matchRecipes = [];
         const searchWords = Utils.cleanText(this.searchText).split(" "); 
 
-        for (let recipe of this.recipes) {
-            
-            if (moreThanThreeCharacters) {
-                const isWordPresent = (word) => recipe.getText().indexOf(word) >= 0;
-                if (searchWords.every(isWordPresent)) {
-                    this.matchRecipes.push(recipe);
+        if (moreThanThreeCharacters) {
+
+            for (let recipe of this.recipes) {
+
+                let allWordsFound = true;
+                for ( let word of searchWords ) {
+                    if (recipe.getText().indexOf(word) < 0) {
+                        allWordsFound = false;
+                        break;
+                    }
                 }
-            } else {
-                this.matchRecipes.push(recipe);
+                if (allWordsFound) {
+                    this.matchRecipes.push(recipe);
+                }    
             }
-           
+    
+        } else {
+            this.matchRecipes.push(this.recipes);
         }
+
 
         let newIngredients = this.getUniqueIngredients(this.matchRecipes);
         let newAppliances = this.getUniqueAppliances(this.matchRecipes);
@@ -162,7 +172,7 @@ class RecipeFinder {
             for ( let ustensil of recipe.ustensils) {
                 ustensils.add(ustensil);
             }
-        }
+        }  
         return ustensils;
     }
 

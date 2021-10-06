@@ -5,11 +5,14 @@
 #gen-filters {
     display: flex;
     column-gap: 10px;
+    margin-right: 30em;
 
     @include media-breakpoint-down(md) {
         flex-wrap: wrap;   
         row-gap: 10px;
     }
+
+    
 }
 
 .filter {
