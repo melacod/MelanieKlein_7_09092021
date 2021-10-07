@@ -53,7 +53,7 @@ class RecipeFinder {
             }
     
         } else {
-            this.matchRecipes.push(this.recipes);
+            this.matchRecipes = this.recipes;
         }
 
 
