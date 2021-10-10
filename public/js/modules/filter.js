@@ -6,22 +6,36 @@ export { Filter };
 
 class Filter {
 
-    constructor (name, options, parentTagElement, className) {
+    constructor (name, options, genTags, className) {
         this.name = name;
+        // Example: name = Ingrédients => item = ingrédient
         this.item = name.toLowerCase().slice(0, name.length -1);
         this.options = options;
-        this.parentTagElement = parentTagElement;
-        this.className = className;
         this.selectedOptions = new Set ();
+        this.genTags = genTags;
+        this.className = className;
     }
 
-    updateOptions (newOptions) {
-        this.options = newOptions;
+    getSelectedOptions () {
+        return this.selectedOptions;
     }
+
+    // Link recipe finder with filter ****************************************************************************
 
     linkRecipeFinder (recipeFinder) {
         this.recipeFinder = recipeFinder;
     }
+
+    // Reset options ****************************************************************************
+
+    updateOptions (newOptions, deleteSelectedOptions) {
+        this.options = newOptions;
+        if (deleteSelectedOptions === true) {
+            this.selectedOptions.clear();
+        }
+    }
+
+    // Display filter with options ****************************************************************************
 
     displayFilter () {
         this.htmlOptions = this.displayFilterOptions();
@@ -36,14 +50,15 @@ class Filter {
         return htmlOptions;
     }
 
-    // Add static event: html elements not re generated
+    // Add static event: html elements not re generated ****************************************************************************
+
     addStaticEvents () {
         // DOM elements
         const btnOpenFilter = document.querySelector('#'+this.name+' .btn');
         const listFilters = document.querySelector('#'+this.name+' .filter--selection');
         const btnCloseFilter = document.querySelector('#'+this.item+'--icon');
         const options = document.querySelectorAll('#'+this.name+' .filter--option');
-        const searchOptions = document.querySelector('#'+this.name+' .filter--input');
+        const inputSearchOptions = document.querySelector('#'+this.name+' .filter--input');
         
         listFilters.style.display = 'none';
         btnOpenFilter.style.display= "block";
@@ -54,11 +69,12 @@ class Filter {
         for (let option of options) {
             option.addEventListener("click", function(event) { this.selectOption(event)}.bind(this));
         }
-        searchOptions.addEventListener('keyup', function(event) { this.searchOptions(event)}.bind(this));
+        inputSearchOptions.addEventListener('keyup', function(event) { this.filterOptions(event)}.bind(this));
     }
 
-    // open to filter
-    openFilter (){ 
+    // Open/Close filter ****************************************************************************
+
+    openFilter () { 
         this.hideAllFilters();
 
         // DOM elements
@@ -68,12 +84,11 @@ class Filter {
         listFilters.style.display = 'block';
         btnOpenFilter.style.display = 'none';
 
-        Animation.fadeIn(listFilters.querySelector('.filter--search'), 750, 0);
-        Animation.fadeIn(listFilters.querySelector('.filter--options'), 1000, 0);
+        Animation.fadeIn(listFilters.querySelector('.filter--search'), 500, 0);
+        Animation.fadeIn(listFilters.querySelector('.filter--options'), 600, 0);
     }
 
-    //close to filter
-    closeFilter (){
+    closeFilter () {
         //dom elements
         const btnOpenFilter = document.querySelector('#'+this.name+' .btn');
         const listFilters = document.querySelector('#'+this.name+' .filter--selection');
@@ -81,10 +96,11 @@ class Filter {
         listFilters.style.display = "none";
         btnOpenFilter.style.display = "block";
 
-        Animation.fadeIn(btnOpenFilter, 750, 0);
+        Animation.fadeIn(btnOpenFilter, 500, 0);
     }
 
-    // select an item
+    // Select/Remove an option from filter ****************************************************************************
+    
     selectOption (event) {
         let selectedOption = event.target;
         let optionName = selectedOption.textContent;
@@ -92,65 +108,97 @@ class Filter {
         // hide option from filter
         selectedOption.classList.add('filter--option--selected');
 
-        // create option button in DOM
+        // add option to selected options set
+        this.selectedOptions.add(optionName);
+
+        // create tag button in dom
+        this.displayTag(optionName);
+
+        // display options
+        this.filterOptions();
+
+        // filter recipe with new selected option
+        this.recipeFinder.filterMatchRecipes();
+    }
+
+    displayTag (optionName) {
         let tagObject = { optionName : optionName , className : this.className };
-        this.parentTagElement.insertAdjacentHTML('beforeend', Template.fillTemplate('tag', tagObject));
+        this.genTags.insertAdjacentHTML('beforeend', Template.fillTemplate('tag', tagObject));
 
-        let optionButton = this.parentTagElement.querySelector('[data-option="'+optionName+'"]');
+        let optionButton = this.genTags.querySelector('[data-option="' + optionName + '"]');
         optionButton.addEventListener("click", function(event) { this.removeOption(event)}.bind(this));
-
-        this.searchOptions();
-        
     }
 
     removeOption (event) {
         let optionName = event.target.dataset.option;
         
-        // remove option button from DOM
+        // remove tag button from DOM
         event.target.remove();
 
-        // display option in filter
-        const options = document.querySelectorAll('#'+this.name+' .filter--option');
-        for (let option of options) {
-            if (option.dataset.option === optionName) {
-                option.classList.remove('filter--option--selected');
-                break;
-            }
-        }
-        this.searchOptions();
+        // remove option from selected options set
+        this.selectedOptions.delete(optionName);
+
+        // display options
+        this.filterOptions();
+
+        // filter recipe with removed option
+        this.recipeFinder.filterMatchRecipes();
     }
 
-    searchOptions () {
-        this.selectedOptions.clear();
+    filterOptions () {
 
-        const text = document.querySelector('#'+this.name+' .filter--input').value;
         const options = document.querySelectorAll('#'+this.name+' .filter--option');
-        const words = text.split(" ");
+        for (let option of options) {
+            option.classList.remove('filter--option--hide');
+        }
         
-        for (let option of options) {
-            let cleanOption = Utils.cleanText(option.dataset.option);
-            const isWordPresent = (word) => cleanOption.indexOf(word) >= 0;
-
-            // Hide option is already selected
-            let isOptionSelected = option.classList.contains('filter--option--selected');
-            if (isOptionSelected) {
-                this.selectedOptions.add(option.dataset.option);
-                option.classList.add ('filter--option--hide');
-
-            // Display option if searched text in option or no searched text
-            } else if (text == "" || words.every(isWordPresent)) { 
-                option.classList.remove('filter--option--hide');
-
-            // Hide option in other case
-            } else {
-                option.classList.add ('filter--option--hide');
-            }
-        }
-        this.recipeFinder.searchRecipesWithFilters();
+        let optionsToHide = this.getOptionsToHide();
+        for (let option of optionsToHide) {
+            option.classList.add('filter--option--hide');
+        }   
     }
 
-    getSelectedOptions () {
-        return this.selectedOptions;
+    getOptionsToHide () {
+        let optionsToHide = [];
+        const options = document.querySelectorAll('#'+this.name+' .filter--option');
+        for (let option of options) {
+            
+            // Hide option is already selected
+            let hide = this.selectedOptions.has(option.dataset.option);
+            
+            // Hide option if does not match text
+            if (hide === false) {
+                hide = this.doesTextMatchOption(option) === false;
+            }
+
+            // Add option to array
+            if (hide === true) {
+                optionsToHide.push(option);
+            }
+        }
+        return optionsToHide;
+    }
+
+    doesTextMatchOption (option) {
+        const text = document.querySelector('#'+this.name+' .filter--input').value;
+        
+        // If text is empty, option match!
+        if (text == "") {
+            return true;
+        }
+
+        const words = text.split(" ");
+        let cleanOption = Utils.cleanText(option.dataset.option);
+        for (let word of words) {
+
+            // If one word not found, option does not match !
+            if (cleanOption.indexOf(word) === -1) {
+                return false;
+            }
+        }
+
+        // all words found, option match !
+        return true;
     }
 
     hideAllFilters () {

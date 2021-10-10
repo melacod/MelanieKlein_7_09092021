@@ -5,7 +5,7 @@ class Template {
      // load all template HTML files
      static async loadTemplates () {
         Template.templates = {};
-        for (let templateName of ['filter', 'filter-option', 'tag', 'recipe', 'recipe-ingredient']) {
+        for (let templateName of ['navbar', 'filter', 'filter-option', 'tag', 'recipe', 'recipe-ingredient']) {
             Template.templates[templateName] = await Template.loadTemplate(templateName);
         }
      }

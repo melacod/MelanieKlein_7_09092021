@@ -1,45 +1,43 @@
 import { Filter } from "./filter.js";
+import { Template } from "./template.js";
 import { Utils } from "./utils.js";
 
 export { RecipeFinder };
 
 class RecipeFinder {
 
-    constructor (recipes, genFilters, genTags, genRecipes) {
+    constructor (recipes, genNavbar, genFilters, genTags, genRecipes) {
         this.recipes = recipes;
+        this.matchRecipes = this.recipes;
+        this.genNavbar = genNavbar;
         this.genFilters = genFilters;
         this.genTags = genTags;
         this.genRecipes = genRecipes;
         this.searchText = "";
-        this.matchRecipes = [];
+        this.displayNavbar();
+        this.addNavbarEvent();
         this.createFilters();
+        this.displayFilters();
+        this.displayRecipes(this.recipes);
     }
     
-    addStaticEvents () {
-        const navSearch = document.querySelector('#navSearch');
-        navSearch.addEventListener("keyup", function(event) { this.changeSearchText(event)}.bind(this));
-    } 
-
-    changeSearchText (event) {
-        this.searchText = event.target.value;
-        this.searchRecipesWithNavbar();
-    } 
+    // Search recipe with navbar ****************************************************************************
 
     searchRecipesWithNavbar () {
-
-        
         console.log("Search recipes with navbar");
         console.log(" - Search text: " + this.searchText);
 
-        const moreThanThreeCharacters = this.searchText.length >= 3;
-
         this.matchRecipes = [];
-        const searchWords = Utils.cleanText(this.searchText).split(" "); 
 
+        // If searched text contains more than 3 characters: search match recipes else display all recipes
+        const moreThanThreeCharacters = this.searchText.length >= 3;
         if (moreThanThreeCharacters) {
 
+            // Clean and cut the searched text into words 
+            const searchWords = Utils.cleanText(this.searchText).split(" "); 
             for (let recipe of this.recipes) {
 
+                // If all words found in recipe text (name, desicprion and ingredients names), the recipe match (add it to match recipes) !
                 let allWordsFound = true;
                 for ( let word of searchWords ) {
                     if (recipe.getText().indexOf(word) < 0) {
@@ -55,22 +53,19 @@ class RecipeFinder {
         } else {
             this.matchRecipes = this.recipes;
         }
+        console.log("Found "+this.matchRecipes.length+" match recipes");
 
-
-        let newIngredients = this.getUniqueIngredients(this.matchRecipes);
-        let newAppliances = this.getUniqueAppliances(this.matchRecipes);
-        let newUstensils = this.getUniqueUstensils(this.matchRecipes);
-        
-        this.filterIngredients.updateOptions(newIngredients);
-        this.filterAppliances.updateOptions(newAppliances);
-        this.filterUstensils.updateOptions(newUstensils);
-
-        this.displayFilters();
+        // Display matched recipes 
         this.displayRecipes(this.matchRecipes);
+
+        // display new filters based on matched recipes
+        this.computeNewFilters(this.matchRecipes, true);
     }
 
-    searchRecipesWithFilters () {
-        console.log("Search recipes with filters");
+    // Filter match recipes ****************************************************************************
+
+    filterMatchRecipes () {
+        console.log("Filter match recipes");
         
         let selectedIngredients = this.filterIngredients.getSelectedOptions();
         let selectedAppliances = this.filterAppliances.getSelectedOptions();
@@ -138,12 +133,37 @@ class RecipeFinder {
             }
 
         }
+        console.log("Found " + filterRecipes.length + " filter recipes");
 
         // display all filtered recipes
         this.displayRecipes(filterRecipes);
 
         // display new filters based on filtered recipes
+        this.computeNewFilters(filterRecipes, false);
+    }
 
+   // Compute new filters from recipes ****************************************************************************
+   
+   computeNewFilters (recipes, deleteSelectedOptions) {
+
+        // Clean tags if delete selected options
+        if (deleteSelectedOptions === true) {
+            this.genTags.innerHTML = "";
+        }
+
+        // Compute unique ingrendiens/applicances/ustensils from match recipes
+        let newIngredients = this.getUniqueIngredients(recipes);
+        let newAppliances = this.getUniqueAppliances(recipes);
+        let newUstensils = this.getUniqueUstensils(recipes);
+
+        // Update filters with new options
+        this.filterIngredients.updateOptions(newIngredients, deleteSelectedOptions);
+        this.filterAppliances.updateOptions(newAppliances, deleteSelectedOptions);
+        this.filterUstensils.updateOptions(newUstensils, deleteSelectedOptions);
+
+        // Display filters with new options
+        this.genFilters.innerHTML = "";
+        this.displayFilters();
     }
 
     // Get unique options ****************************************************************************
@@ -202,11 +222,27 @@ class RecipeFinder {
         this.filterUstensils.linkRecipeFinder(this);
     }
 
+    // Display navbar ****************************************************************************
+
+    displayNavbar () {
+        this.genNavbar.insertAdjacentHTML('beforeend', Template.fillTemplate('navbar', {}));
+    }
+
+    // Add navbar event ****************************************************************************
+
+    addNavbarEvent () {
+        const navSearch = document.querySelector('#navSearch');
+        navSearch.addEventListener("keyup", function(event) { this.changeSearchText(event)}.bind(this));
+    } 
+
+    changeSearchText (event) {
+        this.searchText = event.target.value;
+        this.searchRecipesWithNavbar();
+    } 
+
     // Display filters ****************************************************************************
     
     displayFilters () {
-        this.genTags.innerHTML = "";
-        this.genFilters.innerHTML = "";
         this.displayFilterIngredients();
         this.displayFilterAppliances();
         this.displayFilterUstensils();
@@ -215,24 +251,22 @@ class RecipeFinder {
     displayFilterIngredients () {
         this.genFilters.insertAdjacentHTML('beforeend', this.filterIngredients.displayFilter());
         this.filterIngredients.addStaticEvents();
+        this.filterIngredients.filterOptions();
     }
 
     displayFilterAppliances () {
         this.genFilters.insertAdjacentHTML('beforeend', this.filterAppliances.displayFilter());
         this.filterAppliances.addStaticEvents();
+        this.filterAppliances.filterOptions();
     }
 
     displayFilterUstensils () {
         this.genFilters.insertAdjacentHTML('beforeend', this.filterUstensils.displayFilter());
         this.filterUstensils.addStaticEvents();
+        this.filterUstensils.filterOptions();
     }
 
     // Display recipes ****************************************************************************
-
-    displayAllRecipes () {
-        this.matchRecipes = this.recipes;
-        this.displayRecipes(this.recipes);
-    }
 
     displayRecipes (recipes) {
         this.genRecipes.innerHTML = "";
