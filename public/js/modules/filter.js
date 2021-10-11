@@ -102,44 +102,44 @@ class Filter {
     // Select/Remove an option from filter ****************************************************************************
     
     selectOption (event) {
-        let selectedOption = event.target;
-        let optionName = selectedOption.textContent;
-
-        // hide option from filter
-        selectedOption.classList.add('filter--option--selected');
+        // get option clicked and its name
+        let optionClicked = event.target;
+        let nameOptionClicked = optionClicked.textContent.trim();
 
         // add option to selected options set
-        this.selectedOptions.add(optionName);
+        this.selectedOptions.add(nameOptionClicked);
 
         // create tag button in dom
-        this.displayTag(optionName);
-
-        // display options
-        this.filterOptions();
+        this.displayTag(nameOptionClicked);
 
         // filter recipe with new selected option
         this.recipeFinder.filterMatchRecipes();
     }
 
     displayTag (optionName) {
+        // create option button tag in dom
         let tagObject = { optionName : optionName , className : this.className };
         this.genTags.insertAdjacentHTML('beforeend', Template.fillTemplate('tag', tagObject));
 
-        let optionButton = this.genTags.querySelector('[data-option="' + optionName + '"]');
-        optionButton.addEventListener("click", function(event) { this.removeOption(event)}.bind(this));
+        // add click event for remove tag
+        for (let tagButton of this.genTags.children) {
+            if (tagButton.innerText.trim() === optionName) {
+                tagButton.addEventListener("click", function(event) { this.removeOption(event)}.bind(this));
+                break;
+            }
+        }
     }
 
     removeOption (event) {
-        let optionName = event.target.dataset.option;
+        // get option button clicked and its name
+        let buttonOptionClicked = event.target;
+        let nameOptionClicked = buttonOptionClicked.textContent.trim();
         
         // remove tag button from DOM
-        event.target.remove();
+        buttonOptionClicked.remove();
 
         // remove option from selected options set
-        this.selectedOptions.delete(optionName);
-
-        // display options
-        this.filterOptions();
+        this.selectedOptions.delete(nameOptionClicked);
 
         // filter recipe with removed option
         this.recipeFinder.filterMatchRecipes();
@@ -147,11 +147,13 @@ class Filter {
 
     filterOptions () {
 
+        // Display all options
         const options = document.querySelectorAll('#'+this.name+' .filter--option');
         for (let option of options) {
             option.classList.remove('filter--option--hide');
         }
-        
+    
+        // Hide selected or not matched options
         let optionsToHide = this.getOptionsToHide();
         for (let option of optionsToHide) {
             option.classList.add('filter--option--hide');
@@ -160,17 +162,27 @@ class Filter {
 
     getOptionsToHide () {
         let optionsToHide = [];
+
         const options = document.querySelectorAll('#'+this.name+' .filter--option');
+
         for (let option of options) {
+            let optionName = option.textContent.trim();
+
+            let hide = false;
             
             // Hide option is already selected
-            let hide = this.selectedOptions.has(option.dataset.option);
+            if (this.selectedOptions.has(optionName)) {
+                hide = true;
             
-            // Hide option if does not match text
-            if (hide === false) {
-                hide = this.doesTextMatchOption(option) === false;
-            }
+            // Display option if option name match text
+            } else if (this.doesTextMatchOption(option)) {
+                hide = false;
 
+            // Hide option if option name does not match text
+            } else {
+                hide = true;
+            }
+            
             // Add option to array
             if (hide === true) {
                 optionsToHide.push(option);
@@ -180,19 +192,20 @@ class Filter {
     }
 
     doesTextMatchOption (option) {
-        const text = document.querySelector('#'+this.name+' .filter--input').value;
+        const searchText = document.querySelector('#'+this.name+' .filter--input').value;
         
         // If text is empty, option match!
-        if (text == "") {
+        if (searchText == "") {
             return true;
         }
 
-        const words = text.split(" ");
-        let cleanOption = Utils.cleanText(option.dataset.option);
-        for (let word of words) {
+        let optionNameCleaned = Utils.cleanText(option.textContent.trim());
+        
+        const searchWords = Utils.cleanText(searchText).split(" ");
+        for (let searchWord of searchWords) {
 
             // If one word not found, option does not match !
-            if (cleanOption.indexOf(word) === -1) {
+            if (optionNameCleaned.indexOf(searchWord) === -1) {
                 return false;
             }
         }
