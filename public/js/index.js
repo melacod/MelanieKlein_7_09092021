@@ -1,5 +1,5 @@
 import { Data } from "./modules/data.js";
-import { Factory } from "./modules/factory.js";
+import { Recipe } from "./modules/recipe.js";
 import { RecipeFinder } from "./modules/recipeFinder.js";
 import { Template } from "./modules/template.js";
 
@@ -15,10 +15,9 @@ let recipeFinder = undefined;
 Template.loadTemplates().then( () => {
     Data.loadJsonData().then( (jsonData) => {
 
-        let recipes = Factory.createRecipes(jsonData.recipes);
+        let recipes = jsonData.recipes.map(jsonRecipe => new Recipe (jsonRecipe));
         
         recipeFinder = new RecipeFinder(recipes, genNavbar, genFilters, genTags, genRecipes);
 
-        console.log(recipes);
     });
 });

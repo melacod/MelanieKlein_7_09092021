@@ -3,6 +3,11 @@ export { Utils };
 // utility functions
 class Utils {
 
+    // Clean a text consists in
+    // - put text in lower case
+    // - trim text (remove left/right spaces)
+    // - replace special character by their corresponding standard character
+    // - replace each group of 2 spaces or more by only one space
     static cleanText (inputText) {
         let cleanText = inputText.toLowerCase().trim();
 

@@ -12,13 +12,7 @@ class Recipe {
         this.id = id;
         this.name = name;
         this.servings = servings;
-        this.ingredients = [];
-
-        for (let ingredient of ingredients) {
-            let ingredientObj = new Ingredient (ingredient);
-            this.ingredients.push(ingredientObj);
-        }
-        
+        this.ingredients = ingredients.map(ingredient => new Ingredient (ingredient));
         this.time = time;
         this.description = description;
         this.appliance = appliance;
@@ -26,32 +20,26 @@ class Recipe {
     }
 
     displayRecipe () {
-        this.htmlIngredients = this.displayRecipeIngredients();
+        this.computeHtmlForIngredients();
         return Template.fillTemplate('recipe', this);
     }
 
-    displayRecipeIngredients () {
-        let htmlIngredients = "";
-        for (let ingredient of this.ingredients) {
-            htmlIngredients += Template.fillTemplate('recipe-ingredient', ingredient);
-        }
-        return htmlIngredients;
+    computeHtmlForIngredients () {
+        this.htmlIngredients = this.ingredients
+            .map(ingredient => Template.fillTemplate('recipe-ingredient', ingredient))
+            .join("");
     }
 
     getText () {
-        let text = this.name + " " + this.description;
-        for (let ingredient of this.ingredients) {
-            text += " " + ingredient.name; 
-        }
+        let text = this.name + " " + this.description + " ";
+        text += this.ingredients
+            .map(ingredient => ingredient.name)
+            .join(" ");
         return Utils.cleanText(text);
     }
 
     getIngredientsNames () {
-        let ingredientsNames = [];
-        for (let ingredient of this.ingredients) {
-            ingredientsNames.push(ingredient.name);
-        }
-        return ingredientsNames;
+        return this.ingredients.map(ingredient => ingredient.name);
     }
     
 }

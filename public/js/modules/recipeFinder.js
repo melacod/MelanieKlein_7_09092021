@@ -27,20 +27,13 @@ class RecipeFinder {
         console.log("Search recipes with navbar");
         console.log(" - Search text: " + this.searchText);
 
-        this.matchRecipes = [];
-
         // If searched text contains more than 3 characters: search match recipes else display all recipes
         const moreThanThreeCharacters = this.searchText.length >= 3;
         if (moreThanThreeCharacters) {
 
             // Clean and cut the searched text into words 
             const searchWords = Utils.cleanText(this.searchText).split(" "); 
-            
             this.matchRecipes = this.recipes.filter(recipe => searchWords.every(word => recipe.getText().indexOf(word) >= 0));
-
-            console.log(this.matchRecipes);
-
-            
     
         } else {
             this.matchRecipes = this.recipes;
@@ -67,64 +60,11 @@ class RecipeFinder {
         console.log(" - Ingredients: ", selectedIngredients);
         console.log(" - Ustensils: ", selectedUstensils);
 
-        // array for filtered recipes
-        let filterRecipes = [];
-
-        // loop on each matching recipe
-        for (let matchRecipe of this.matchRecipes) {
-            
-            // indicate if the recipe check all filters
-            let isFilter = true;
-        
-            // check if all selected ingredients are present in ingredients of recipe
-            let ingredientsNames = matchRecipe.getIngredientsNames();
-            for (let selectedIngredient of selectedIngredients) {
-                let found = false;
-                for (let ingredientName of ingredientsNames) {
-                    if (selectedIngredient == ingredientName) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                   isFilter = false;
-                   break;
-                }
-            }
-            
-            // check if all selected appliances are present in appliance of recipe
-            if (isFilter) {
-                for (let selectedAppliance of selectedAppliances) {
-                    if (selectedAppliance !== matchRecipe.appliance) {
-                        isFilter = false;
-                        break;
-                    }
-                }
-            }
-
-            // check if all selected ustensils are present in ustensils of recipe
-            if (isFilter) {
-                for (let selectedUstensil of selectedUstensils) {
-                    let found = false;
-                    for (let ustensil of matchRecipe.ustensils) {
-                        if (selectedUstensil == ustensil) {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        isFilter = false;
-                        break;
-                    }
-                }
-            }
-
-            // if recipe check all filters, add it to filtered recipes
-            if (isFilter) {
-                filterRecipes.push(matchRecipe);
-            }
-
-        }
+        let filterRecipes = this.matchRecipes.filter(matchRecipe => 
+                Array.from(selectedIngredients).every(selectedIngredient => matchRecipe.getIngredientsNames().includes(selectedIngredient))
+            &&  Array.from(selectedAppliances).every(selectedAppliance => matchRecipe.appliance === selectedAppliance)
+            &&  Array.from(selectedUstensils).every(selectedUstensil => matchRecipe.ustensils.includes(selectedUstensil))
+        );
         console.log("Found " + filterRecipes.length + " filter recipes");
 
         // display all filtered recipes
@@ -161,31 +101,24 @@ class RecipeFinder {
     // Get unique options ****************************************************************************
     
     getUniqueIngredients (recipes) {
-        let ingredients = new Set ();
-        for (let recipe of recipes) {
-            for (let ingredient of recipe.ingredients) {
-                ingredients.add(ingredient.name);
-            }
-        }
-        return ingredients;
+        return new Set(recipes
+            .map(recipe => recipe.ingredients)
+            .flat()
+            .map(ingredient => ingredient.name)
+        );
     }
     
     getUniqueAppliances (recipes) {
-        let appliances = new Set();
-        for (let recipe of recipes) {
-            appliances.add(recipe.appliance);
-        }
-        return appliances;
+        return new Set(recipes
+            .map(recipe => recipe.appliance)
+        );
     }
 
     getUniqueUstensils (recipes) {
-        let ustensils = new Set ();
-        for (let recipe of recipes) {
-            for ( let ustensil of recipe.ustensils) {
-                ustensils.add(ustensil);
-            }
-        }  
-        return ustensils;
+        return new Set(recipes
+            .map(recipe => recipe.ustensils)
+            .flat()
+        );
     }
 
     // Create filters ****************************************************************************
@@ -261,10 +194,11 @@ class RecipeFinder {
     // Display recipes ****************************************************************************
 
     displayRecipes (recipes) {
+        let htmlRecipes = recipes
+            .map(recipe => recipe.displayRecipe())
+            .join("");
         this.genRecipes.innerHTML = "";
-        for (let recipe of recipes) {
-            this.genRecipes.insertAdjacentHTML('beforeend', recipe.displayRecipe());
-        }
+        this.genRecipes.insertAdjacentHTML('beforeend', htmlRecipes);
         this.noRecipeFoundDisplay(recipes);
     }
 

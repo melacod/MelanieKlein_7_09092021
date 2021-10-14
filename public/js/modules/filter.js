@@ -38,16 +38,14 @@ class Filter {
     // Display filter with options ****************************************************************************
 
     displayFilter () {
-        this.htmlOptions = this.displayFilterOptions();
+        this.computeHtmlForOptions();
         return Template.fillTemplate('filter', this);
     }
 
-    displayFilterOptions () {
-        let htmlOptions = "";
-        for (let option of this.options) {
-            htmlOptions += Template.fillTemplate('filter-option', {optionName : option});
-        }
-        return htmlOptions;
+    computeHtmlForOptions () {
+        this.htmlOptions = Array.from(this.options)
+            .map(option => Template.fillTemplate('filter-option', {optionName : option}))
+            .join("");
     }
 
     // Add static event: html elements not re generated ****************************************************************************
@@ -66,9 +64,7 @@ class Filter {
         // add listener events to filter
         btnOpenFilter.addEventListener("click", function (event) { this.openFilter(event)}.bind(this));
         btnCloseFilter.addEventListener("click", function(event) { this.closeFilter(event)}.bind(this));
-        for (let option of options) {
-            option.addEventListener("click", function(event) { this.selectOption(event)}.bind(this));
-        }
+        options.forEach(option => option.addEventListener("click", function(event) { this.selectOption(event)}.bind(this)));
         inputSearchOptions.addEventListener('keyup', function(event) { this.filterOptions(event)}.bind(this));
     }
 
@@ -122,12 +118,9 @@ class Filter {
         this.genTags.insertAdjacentHTML('beforeend', Template.fillTemplate('tag', tagObject));
 
         // add click event for remove tag
-        for (let tagButton of this.genTags.children) {
-            if (tagButton.innerText.trim() === optionName) {
-                tagButton.addEventListener("click", function(event) { this.removeOption(event)}.bind(this));
-                break;
-            }
-        }
+        Array.from(this.genTags.children)
+            .filter(tagButton => tagButton.innerText.trim() === optionName)
+            .forEach(tagButton => tagButton.addEventListener("click", function(event) { this.removeOption(event)}.bind(this)));
     }
 
     removeOption (event) {
@@ -145,84 +138,42 @@ class Filter {
         this.recipeFinder.filterMatchRecipes();
     }
 
+    // Filter options consists in
+    // - Display all options (previously hidden or not)
+    // - Hide needed options
     filterOptions () {
-
-        // Display all options
-        const options = document.querySelectorAll('#'+this.name+' .filter--option');
-        for (let option of options) {
-            option.classList.remove('filter--option--hide');
-        }
-    
-        // Hide selected or not matched options
-        let optionsToHide = this.getOptionsToHide();
-        for (let option of optionsToHide) {
-            option.classList.add('filter--option--hide');
-        }   
+        document.querySelectorAll('#'+this.name+' .filter--option')
+            .forEach(option => option.classList.remove('filter--option--hide'));
+        
+        this.getOptionsToHide()
+            .forEach(option => option.classList.add('filter--option--hide'));
     }
 
+    // Hide an option if
+    // - the option is already selected
+    // - the option name does not match the search input text
     getOptionsToHide () {
-        let optionsToHide = [];
-
         const options = document.querySelectorAll('#'+this.name+' .filter--option');
-
-        for (let option of options) {
-            let optionName = option.textContent.trim();
-
-            let hide = false;
-            
-            // Hide option is already selected
-            if (this.selectedOptions.has(optionName)) {
-                hide = true;
-            
-            // Display option if option name match text
-            } else if (this.doesTextMatchOption(option)) {
-                hide = false;
-
-            // Hide option if option name does not match text
-            } else {
-                hide = true;
-            }
-            
-            // Add option to array
-            if (hide === true) {
-                optionsToHide.push(option);
-            }
-        }
-        return optionsToHide;
+        return Array.from(options)
+            .filter(option => this.selectedOptions.has(option.textContent.trim()) || !this.doesTextMatchOption(option));
     }
 
+    // An option match the search input text if all
+    // - the search input text is empty
+    // - all words of search input text are present in the option name
     doesTextMatchOption (option) {
         const searchText = document.querySelector('#'+this.name+' .filter--input').value;
-        
-        // If text is empty, option match!
-        if (searchText == "") {
-            return true;
-        }
-
         let optionNameCleaned = Utils.cleanText(option.textContent.trim());
-        
         const searchWords = Utils.cleanText(searchText).split(" ");
-        for (let searchWord of searchWords) {
-
-            // If one word not found, option does not match !
-            if (optionNameCleaned.indexOf(searchWord) === -1) {
-                return false;
-            }
-        }
-
-        // all words found, option match !
-        return true;
+        return searchText == "" || searchWords.every(word => optionNameCleaned.indexOf(word) >= 0);
     }
 
     hideAllFilters () {
-        let allFilterSelection = document.querySelectorAll('.filter--selection');
-        for (let filterSelection of allFilterSelection) {
-            filterSelection.style.display = 'none';
-        }
-        let allFilterButton = document.querySelectorAll('.filter--button');
-        for (let filterButton of allFilterButton) {
-            filterButton.style.display = 'block';
-        }
+        document.querySelectorAll('.filter--selection')
+            .forEach(element => element.style.display = 'none');
+
+        document.querySelectorAll('.filter--button')
+            .forEach(element => element.style.display = 'block');
     }
 
 }
