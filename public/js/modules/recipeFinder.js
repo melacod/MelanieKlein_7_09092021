@@ -35,20 +35,12 @@ class RecipeFinder {
 
             // Clean and cut the searched text into words 
             const searchWords = Utils.cleanText(this.searchText).split(" "); 
-            for (let recipe of this.recipes) {
+            
+            this.matchRecipes = this.recipes.filter(recipe => searchWords.every(word => recipe.getText().indexOf(word) >= 0));
 
-                // If all words found in recipe text (name, desicprion and ingredients names), the recipe match (add it to match recipes) !
-                let allWordsFound = true;
-                for ( let word of searchWords ) {
-                    if (recipe.getText().indexOf(word) < 0) {
-                        allWordsFound = false;
-                        break;
-                    }
-                }
-                if (allWordsFound) {
-                    this.matchRecipes.push(recipe);
-                }    
-            }
+            console.log(this.matchRecipes);
+
+            
     
         } else {
             this.matchRecipes = this.recipes;
