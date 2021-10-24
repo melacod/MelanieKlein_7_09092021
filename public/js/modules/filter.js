@@ -157,7 +157,14 @@ class Filter {
         let optionsToHide = this.getOptionsToHide();
         for (let option of optionsToHide) {
             option.classList.add('filter--option--hide');
-        }   
+        }  
+        
+        const btnFilter = document.querySelector('#'+this.name+' .btn');
+        if (options.length === optionsToHide.length) {
+            btnFilter.classList.add('disabled');
+        } else {
+            btnFilter.classList.remove('disabled');
+        }
     }
 
     getOptionsToHide () {
