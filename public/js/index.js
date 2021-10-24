@@ -9,15 +9,12 @@ const genFilters = document.querySelector('#gen-filters');
 const genTags = document.querySelector('#gen-tags');
 const genRecipes = document.querySelector('#gen-recipes');
 
-// recipe finder object
-let recipeFinder = undefined;
-
 Template.loadTemplates().then( () => {
     Data.loadJsonData().then( (jsonData) => {
 
         let recipes = jsonData.recipes.map(jsonRecipe => new Recipe (jsonRecipe));
         
-        recipeFinder = new RecipeFinder(recipes, genNavbar, genFilters, genTags, genRecipes);
+        new RecipeFinder(recipes, genNavbar, genFilters, genTags, genRecipes);
 
     });
 });
