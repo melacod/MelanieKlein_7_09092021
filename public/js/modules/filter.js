@@ -142,11 +142,19 @@ class Filter {
     // - Display all options (previously hidden or not)
     // - Hide needed options
     filterOptions () {
-        document.querySelectorAll('#'+this.name+' .filter--option')
-            .forEach(option => option.classList.remove('filter--option--hide'));
-        
-        this.getOptionsToHide()
-            .forEach(option => option.classList.add('filter--option--hide'));
+        let options = document.querySelectorAll('#'+this.name+' .filter--option');
+        let optionsToHide = this.getOptionsToHide();
+
+        options.forEach(option => option.classList.remove('filter--option--hide'));
+        optionsToHide.forEach(option => option.classList.add('filter--option--hide'));
+
+        const btnFilter = document.querySelector('#'+this.name+' .btn');
+        if (options.length === optionsToHide.length) {
+            btnFilter.classList.add('disabled');
+        } else {
+            btnFilter.classList.remove('disabled');
+        }
+
     }
 
     // Hide an option if
