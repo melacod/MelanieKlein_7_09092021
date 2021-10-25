@@ -1,1 +1,77 @@
-<mxfile host="app.diagrams.net" modified="2021-10-25T08:57:28.199Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="bSvqcbCANKHn0qkMxcyk" version="15.5.9" type="github"><diagram id="p0ud0MAioigI1QmwYaOK" name="Page-1">7Vpbc9o4FP41zO4+LOP75TGhafuQJtnNdrZ5yghbBrWy5ZHlAP31K1kWtrEAJxBI281MEuvoZp2j7zsXGNmTdPmBgnz+icQQjywjXo7sdyPLMj3P4v+EZCUlvl8LZhTFUmQ0gnv0HdYzlbREMSxqmRQxQjBDeVcYkSyDEevIAKVk0R2WEBx3BDmYwZ7gPgK4L/0XxWwupYHlN/KPEM3mamfTC2VPCtTg+iTFHMRk0RLZVyN7Qglh8ildTiAWyuvq5f2W3vWLUZixIRM+xbc3k8+Tp8f0kf2Vg2+X6KP1Z73KE8BlfeD6ZdlKaQDGXCF1k1A2JzOSAXzVSC8pKbMYim0M3mrGXBOSc6HJhV8hY6vauqBkhIvmLMV1r9xTbLT1bLWoICWN6lGG8f128fC5XD7efTDNm+upPb1WB2KAziDbMc5tTMDvLiQpZHTFJ1KIAUNP3RcB9SWarcc1euYPtaq3WHHHW3bU7mH+vpdFDjL+PBPP17+VDGFUAAZLKq4UiVGCIO8GKVfsZTYt8kp7cuqUqokY8NFTfv2hQB6sjhXNIeW//cFKwg/S3rx3DxorC5Mt5ojB+xxUxlhw7HctmiCMJwQTWs21oRm70BfHY5R8g62e0PNt4K3305j8CVIGly1R32h1rx/IGStFIfVlXjTANR1HyuYt0DrB4WbWois4B5jgErEvYvrYrVsPrZ53y3rlqrFSjYwf90u78dCsIJrNtKql5h0TuN5A5NreWZHrDYLuP6Rk3G1ZBq7+cvhxm4nHYVjjviIXj1yRAGOIyYyClA/MIUX8HJBu9t01HfuhuYTK0WqgmiSJFUU6qMbe1HOPBtWx73bQapuBBq3W2NXg1XklvLpvwhs2APaHI/iISFSnbiNRqy7nnEBUb7kHiLeZ1ELET82q4HELMA0ouokY/jSa2KOLkEpnaxRIzmtmpYQVlSYzMQdlEa46Y5BVY0CzMH/6PSPpyJpUnriIKMoZErsIAe8ppLxaZkblxjHiNiv+eL5jNp7tmGMAg0SLdi8K4DQ5Dtqt0B3bftc5h9bYcnuIt1W+0Ma7ZyoWOP4tcgbdor8b/t4TekWER11FTjJ+GVqE//xw66d3AZbKBHc5ADd8HfrfEVkMo5S0oosKrzyTML6SKkKX9MDVyajW9mo4VxxDdA39zfDgkOD8zXKA74y7Ht+xQ43BNfG5a7yWwf0BDj+LL0QdgbciDIoCRRveeh06N9HyQydY3hU6v8g/O8+KlHtRQd9ELQMoXev0P9ix1zvcEVQ5yKXi9g37Gxt2lSevZ7UrGRsLOVY30QtUUK4WkprpLVTdkfWxD7g24XCeAEmCqrR7SybQQL0ilA0CMTru5Cj88FaTd8s3NvjBNf0+P+jig1fjB8c4Aj8clI6filPswdl3+KY4xbG7QUTwck4xNzhlI8rYwinc9mDVGpaLAcWBrKPNtnT5zumTU631X3bn1BXYe+fMU1V8tHq3f1m9y5OeK8F3deSrqbTBJYNb3eA2f9keVZS5SvhlnZ2UKrQPZ0C8545I3hZOmqdhEatEAR1e5KNzkk7L4tn+OAkiqE/PpoHruDsdwXB/bBrm2Olyoun3M7TQH6u8rU3v4RFcsv4DqyEu+ceCo9+Ho/bo4VnRqEuV+li6KKMyg6N2/atbEfm//KECjsAbu6HR/NgdrGmTY8/sI805QmlMe936xZAbUbf8UbC2vWI95NNh/5wRhxZqnbrjbYn6pchfwjLWqT502PWWLctciFgh5UG/yNb3Ud+pA4AeG2lss5WgXFVnqhnJCvvles5hJ/X+Lyq8lLJeWxTiqz47gznc/cLFmy62HGRbJ3B3OZ/XrLzwZvOdJ5kbN98cs6/+Aw==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-10-25T09:00:00.711Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="7lDkaCrLjTgtZDunRi1I" version="15.5.9" type="github">
+  <diagram id="p0ud0MAioigI1QmwYaOK" name="Page-1">
+    <mxGraphModel dx="1662" dy="772" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MdONCUCv_m_tQpakBiH2-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="00zOwYUux_PG11NLb3bL-1" target="00zOwYUux_PG11NLb3bL-50" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="00zOwYUux_PG11NLb3bL-1" value="&lt;span&gt;L&#39;utilisateur modifie&amp;nbsp;&lt;br&gt;la barre de recherche&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="78" y="102" width="144" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="MdONCUCv_m_tQpakBiH2-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="00zOwYUux_PG11NLb3bL-16" target="00zOwYUux_PG11NLb3bL-36" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="00zOwYUux_PG11NLb3bL-16" value="&lt;span&gt;Toutes les recettes&lt;/span&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="78.75" y="318" width="142.5" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="MdONCUCv_m_tQpakBiH2-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="00zOwYUux_PG11NLb3bL-22" target="MdONCUCv_m_tQpakBiH2-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="00zOwYUux_PG11NLb3bL-22" value="&lt;span&gt;On parcourt toutes les recettes et on vérifie si tous les mots sont inclus dans la recette (nom, description, noms des ingrédients)&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="295.37" y="192.25" width="362" height="61.5" as="geometry" />
+        </mxCell>
+        <mxCell id="00zOwYUux_PG11NLb3bL-24" value="&lt;span&gt;Recettes&amp;nbsp;&lt;br&gt;correspondantes&lt;br&gt;&lt;/span&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="272" y="318" width="159" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="00zOwYUux_PG11NLb3bL-36" value="&lt;span&gt;On met à jour les filtres&lt;br&gt;à partir des recettes&lt;br&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="274.5" y="439" width="154" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="00zOwYUux_PG11NLb3bL-37" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="00zOwYUux_PG11NLb3bL-24" target="00zOwYUux_PG11NLb3bL-36" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="365" y="400" as="sourcePoint" />
+            <mxPoint x="428" y="816" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="00zOwYUux_PG11NLb3bL-39" value="&lt;span&gt;On affiche les recettes&lt;br&gt;et les filtres correspondants&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="270.5" y="517" width="162" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="00zOwYUux_PG11NLb3bL-40" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="00zOwYUux_PG11NLb3bL-36" target="00zOwYUux_PG11NLb3bL-39" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="432" y="800" as="sourcePoint" />
+            <mxPoint x="421" y="814" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MdONCUCv_m_tQpakBiH2-2" value="Non" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="00zOwYUux_PG11NLb3bL-50" target="00zOwYUux_PG11NLb3bL-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MdONCUCv_m_tQpakBiH2-3" value="Oui&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="00zOwYUux_PG11NLb3bL-50" target="00zOwYUux_PG11NLb3bL-22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="00zOwYUux_PG11NLb3bL-50" value="&lt;span&gt;Texte&lt;/span&gt;&lt;br&gt;&lt;span&gt;supérieur ou égal &lt;br&gt;à 3 caractères&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="101.41" y="178" width="97.18" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="MdONCUCv_m_tQpakBiH2-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="00zOwYUux_PG11NLb3bL-57" target="MdONCUCv_m_tQpakBiH2-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="00zOwYUux_PG11NLb3bL-57" value="&lt;span&gt;Aucune recette correspondante&lt;/span&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="486.59000000000003" y="439" width="161" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="MdONCUCv_m_tQpakBiH2-6" value="Non" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="MdONCUCv_m_tQpakBiH2-4" target="00zOwYUux_PG11NLb3bL-57" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MdONCUCv_m_tQpakBiH2-7" value="&amp;nbsp;Oui&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="MdONCUCv_m_tQpakBiH2-4" target="00zOwYUux_PG11NLb3bL-24" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MdONCUCv_m_tQpakBiH2-4" value="Au moins une recette correspondante" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="524" y="295" width="86.18" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="MdONCUCv_m_tQpakBiH2-9" value="&lt;span&gt;On affiche un message &lt;br&gt;à l&#39;utilisateur&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="485.59000000000003" y="517" width="162" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
