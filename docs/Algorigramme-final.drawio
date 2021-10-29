@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-10-25T09:00:00.711Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="7lDkaCrLjTgtZDunRi1I" version="15.5.9" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-29T08:53:15.772Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36" etag="6hzQZ9Fxtbeir8QEalsA" version="15.5.9" type="github">
   <diagram id="p0ud0MAioigI1QmwYaOK" name="Page-1">
     <mxGraphModel dx="1662" dy="772" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -7,7 +7,7 @@
         <mxCell id="MdONCUCv_m_tQpakBiH2-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="00zOwYUux_PG11NLb3bL-1" target="00zOwYUux_PG11NLb3bL-50" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="00zOwYUux_PG11NLb3bL-1" value="&lt;span&gt;L&#39;utilisateur modifie&amp;nbsp;&lt;br&gt;la barre de recherche&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+        <mxCell id="00zOwYUux_PG11NLb3bL-1" value="&lt;span&gt;L&#39;utilisateur saisit&lt;br&gt;la barre de recherche&lt;br&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="78" y="102" width="144" height="48" as="geometry" />
         </mxCell>
         <mxCell id="MdONCUCv_m_tQpakBiH2-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="00zOwYUux_PG11NLb3bL-16" target="00zOwYUux_PG11NLb3bL-36" edge="1">
